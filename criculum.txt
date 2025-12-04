@@ -1,0 +1,2076 @@
+DETAILED CURRICULUM RESOURCE FILE
+txt===============================================================================
+MAX OMEGA PRIME - DETAILED CURRICULUM ROADMAP
+SHARJEEL'S 100-DAY MERN MASTERY JOURNEY
+===============================================================================
+
+TRAINING PERIOD: December 2, 2025 - Mid-March 2026
+EXAM BREAK: December 15-19, 2025 (5 days, curriculum pauses completely)
+TOTAL TRAINING DAYS: Approximately 100 days across 15 weeks
+
+===============================================================================
+PHASE ONE: JAVASCRIPT MASTERY (4 WEEKS)
+GOAL: Transform basic JavaScript into professional modern ES6+ proficiency
+===============================================================================
+
+---
+WEEK ONE: MODERN JAVASCRIPT FOUNDATIONS
+Dates: December 2-8, 2025
+Goal: Master ES6+ features that replaced legacy patterns
+---
+
+DAY 1 - DECEMBER 2, 2025 (MONDAY)
+Topic: Scope (Global, Function, Block) and var vs let vs const Evolution
+
+Learning Objectives:
+- Understand three scope types and their boundaries
+- Explain why var is problematic and how let/const solve issues
+- Predict variable accessibility in nested scope scenarios
+- Apply block scope for cleaner, safer code
+
+Lahore Analogy:
+"Scope Lahore ke muhallat ki tarah hai. Global scope poora shehar hai jahan sab kuch accessible hai. Function scope tumhara specific mohalla hai jahan sirf mohalle wale access kar sakte hain. Block scope tumhare ghar ke andar ka specific kamra hai jahan sirf ghar wale enter kar sakte hain. Var mohalle ki deewar hai jo kamron ko separate nahi karti (no block scope). Let aur const proper kamron ki deewaren hain jo privacy deti hain."
+
+Technical Explanation:
+Global scope: Variables declared outside functions, accessible everywhere
+Function scope: Variables declared inside function, accessible only within that function
+Block scope: Variables declared inside curly braces {}, accessible only within that block
+
+var problems: Function-scoped only, hoisted with undefined, can be redeclared causing bugs
+let solution: Block-scoped, hoisted but not initialized (temporal dead zone), cannot redeclare
+const solution: Block-scoped like let, but cannot be reassigned (though object properties can change)
+
+Key Code Examples:
+```javascript
+// Global Scope Example
+let city = "Lahore"; // Accessible everywhere
+
+function visitMohalla() {
+  // Function Scope
+  let mohalla = "Gulberg"; // Only accessible inside this function
+  
+  if (true) {
+    // Block Scope
+    let street = "MM Alam"; // Only accessible inside this if block
+    const landmark = "Packages Mall"; // Cannot be reassigned
+    
+    console.log(city); // Works - global accessible
+    console.log(mohalla); // Works - function accessible
+    console.log(street); // Works - in same block
+  }
+  
+  console.log(street); // ERROR - street is block-scoped
+}
+
+// var Problem Demonstration
+function varProblem() {
+  for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100);
+  }
+  // Prints: 3, 3, 3 (because var is function-scoped, i leaks out of loop)
+}
+
+// let Solution
+function letSolution() {
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100);
+  }
+  // Prints: 0, 1, 2 (because let is block-scoped, each iteration has own i)
+}
+
+// const with Objects
+const cart = { items: [] };
+cart.items.push("Biryani"); // ALLOWED - modifying property
+cart = {}; // ERROR - cannot reassign const variable
+```
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Create three variables - one for Pakistan (global), one for Lahore (function scope), one for your neighborhood (block scope). Show which is accessible where.
+
+TIER 2 (10-15 min): Integration
+Problem: Fix this code that has scope bugs:
+```javascript
+function orderFood() {
+  if (hungry) {
+    var food = "Biryani";
+  }
+  console.log(food); // Should this work?
+  
+  for (var i = 0; i < 5; i++) {
+    // Process order
+  }
+  console.log(i); // Should this work?
+}
+```
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Create a shopping cart system where cart total is const but items array can be modified. Show that reassigning cart fails but adding items works. Explain why this design is useful.
+
+Daily Task (Required for Proof of Work):
+Create file: day01-scope-mastery.js
+Requirements:
+1. Create 10 intentional scope violations (use var inappropriately, access block variables outside blocks, etc.)
+2. Fix each violation with detailed comments explaining:
+   - What was wrong
+   - Why it caused an error
+   - How let/const fixes it
+   - What scope rule was violated
+3. Include at least 3 examples of const with objects showing property modification works
+4. Push to GitHub repository "mern-journey-sharjeel" with commit message: "Day 01: Scope Mastery - Understand var/let/const differences"
+
+Oral Examination Questions:
+1. CONCEPTUAL: "Explain why const with objects allows property changes but not reassignment. Use Lahore analogy - think of const as your house address (cannot change) but furniture inside house (properties) can be rearranged."
+2. TEACHING-BACK: "Explain scope to your younger brother who is in 10th class. Use family/home example."
+3. APPLICATION: Given this code, predict output and explain why:
+```javascript
+const restaurant = { name: "Bundoo Khan" };
+restaurant.name = "Salt n Pepper"; // Works or error?
+restaurant = { name: "Jade" }; // Works or error?
+```
+
+---
+
+DAY 2 - DECEMBER 3, 2025 (TUESDAY)
+Topic: Arrow Functions and Implicit Returns
+
+Learning Objectives:
+- Write arrow function syntax variations (no params, single param, multiple params)
+- Understand when to use implicit vs explicit returns
+- Recognize where arrow functions should NOT be used (this binding)
+- Convert traditional functions to arrow functions efficiently
+
+Lahore Analogy:
+"Regular function rickshaw ki tarah hai - slow but flexible, har tarah ka samaan le ja sakta hai, aur driver (this) apni marzi se change kar sakta hai. Arrow function Careem bike hai - fast, streamlined, specific routes ke liye best, lekin driver fix hai (lexical this). Jab tumhe simple A to B delivery chahiye (simple operations), bike use karo (arrow function). Jab complex logistics chahiye jahan driver flexibility zaroori hai (object methods), rickshaw use karo (regular function)."
+
+Technical Explanation:
+Arrow functions provide shorter syntax for function expressions and solve 'this' binding problems.
+
+Syntax Variations:
+```javascript
+// No parameters - use empty parentheses
+const greet = () => console.log("Hello Lahore");
+
+// Single parameter - parentheses optional
+const double = x => x * 2;
+const doubleExplicit = (x) => x * 2; // Also valid
+
+// Multiple parameters - parentheses required
+const add = (a, b) => a + b;
+
+// Implicit return - no curly braces, no return keyword
+const multiply = (a, b) => a * b;
+
+// Explicit return - with curly braces, need return keyword
+const divide = (a, b) => {
+  if (b === 0) return "Cannot divide by zero";
+  return a / b;
+};
+
+// Returning object - wrap in parentheses for implicit return
+const createUser = (name, age) => ({ name: name, age: age });
+```
+
+Key Difference: 'this' Binding
+```javascript
+// Regular function - 'this' is dynamic
+const restaurant = {
+  name: "Howdy",
+  regularGreet: function() {
+    console.log("Welcome to " + this.name); // 'this' refers to restaurant object
+  }
+};
+
+// Arrow function - 'this' is lexical (inherits from parent)
+const restaurant2 = {
+  name: "Cosa Nostra",
+  arrowGreet: () => {
+    console.log("Welcome to " + this.name); // 'this' does NOT refer to restaurant2!
+  }
+};
+```
+
+When to Use Arrow Functions:
+✅ Array methods (map, filter, reduce callbacks)
+✅ Short utility functions
+✅ Functions that don't need their own 'this'
+✅ Callbacks in setTimeout, promises
+
+When NOT to Use Arrow Functions:
+❌ Object methods that need 'this'
+❌ Constructor functions
+❌ Functions needing 'arguments' object
+❌ Event handlers that need 'this' to refer to element
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Convert these 5 regular functions to arrow syntax:
+```javascript
+function greetCity(city) { return "Hello " + city; }
+function addGST(price) { return price * 1.17; }
+function isExpensive(price) { return price > 1000; }
+```
+
+TIER 2 (10-15 min): Integration
+Problem: Create array of 10 Lahore restaurants with prices. Use arrow functions to:
+- Map: Add 15% discount to all prices
+- Filter: Show only restaurants under 500 Rs
+- Combine both in one chain
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Create calculator object with methods add, subtract, multiply, divide. Some methods should be arrow functions, some should be regular functions. Explain which should be which and why based on 'this' usage.
+
+Daily Task (Required for Proof of Work):
+Create file: day02-arrow-functions.js
+Requirements:
+1. Convert 20 regular functions to arrow syntax (mix of no params, single param, multiple params, implicit returns, explicit returns)
+2. Complete in under 30 minutes - speed matters for this syntax
+3. Include examples showing:
+   - Implicit return for simple operations
+   - Explicit return for complex logic
+   - Object literal return with parentheses
+4. Create one example demonstrating arrow function 'this' problem in object method
+5. GitHub commit: "Day 02: Arrow Functions - Master concise syntax and understand this binding"
+
+Oral Examination Questions:
+1. CONCEPTUAL: "Arrow function mein 'this' kyun differently behave karta hai? Agar Careem driver (arrow function) fixed hai aur apna context nahi banata, toh object methods mein problem kyun hoti hai?"
+2. TEACHING-BACK: "Explain implicit vs explicit returns to someone who just learned regular functions. When would you use curly braces and when would you skip them?"
+3. APPLICATION: Debug this code:
+```javascript
+const foodPanda = {
+  restaurant: "Bundu Khan",
+  deliver: () => {
+    console.log("Delivering from " + this.restaurant);
+  }
+};
+foodPanda.deliver(); // Why doesn't this work? How to fix?
+```
+
+---
+
+DAY 3 - DECEMBER 4, 2025 (WEDNESDAY)
+Topic: Template Literals and Modern String Methods
+
+Learning Objectives:
+- Use template literals for string interpolation and multi-line strings
+- Apply string methods: trim, slice, includes, startsWith, endsWith, repeat, padStart, padEnd
+- Build dynamic strings for user interfaces
+- Understand when template literals improve code over concatenation
+
+Lahore Analogy:
+"Template literal food recipe ki tarah hai jahan tum ingredients (variables) seedha dish mein mix kar sakte ho. Purana concatenation tareeqa tha ke har ingredient alag bowl mein rakho (alag string), phir sab ko + ke saath joro jaise biryani banate waqt rice aur masala alag alag pakate ho phir mix karte ho. Template literal ek pot cooking hai - sab kuch seedha ek hi jagah mix karo, saaf aur easy."
+
+Technical Explanation:
+Template literals use backticks and allow embedded expressions, multi-line strings, and cleaner syntax.
+
+Basic Syntax:
+```javascript
+// Old concatenation way
+const name = "Ahmed";
+const city = "Lahore";
+const greeting = "Hello " + name + " from " + city;
+
+// Template literal way
+const greeting2 = `Hello ${name} from ${city}`;
+
+// Multi-line strings
+const address = `House No. 123
+Street 45, Gulberg
+Lahore, Pakistan`;
+
+// Expression evaluation
+const price = 500;
+const withGST = `Total with tax: Rs. ${price * 1.17}`;
+
+// Function calls inside
+const shout = (text) => text.toUpperCase();
+const message = `Announcement: ${shout("sale today")}`;
+```
+
+Useful String Methods:
+```javascript
+const userInput = "  Lahore  ";
+userInput.trim(); // "Lahore" - removes whitespace
+
+const restaurant = "Bundu Khan Tikka House";
+restaurant.slice(0, 11); // "Bundu Khan" - extract substring
+restaurant.includes("Khan"); // true - check if contains
+restaurant.startsWith("Bundu"); // true
+restaurant.endsWith("House"); // true
+
+const divider = "-".repeat(20); // "--------------------"
+const id = "42".padStart(5, "0"); // "00042" - useful for formatting
+
+// Practical use case
+const invoice = (name, amount) => {
+  return `
+${"=".repeat(30)}
+INVOICE
+${"=".repeat(30)}
+Customer: ${name.toUpperCase()}
+Amount: Rs. ${amount.toFixed(2)}
+GST (17%): Rs. ${(amount * 0.17).toFixed(2)}
+Total: Rs. ${(amount * 1.17).toFixed(2)}
+${"=".repeat(30)}
+  `.trim();
+};
+```
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Create invoice template using template literals that takes customer name, item name, price and displays formatted receipt with GST calculation.
+
+TIER 2 (10-15 min): Integration
+Problem: Build URL generator for Lahore locations. Take location name, generate Google Maps URL, shorten display name to first 10 characters, check if location contains "Mall" to add special icon.
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Create email template generator for job applications. Take company name, position, applicant name, generate customized email with:
+- Subject line
+- Greeting
+- Body with name interpolation
+- Signature
+Handle edge cases like names with extra spaces using trim().
+
+Daily Task (Required for Proof of Work):
+Create file: day03-template-strings.js
+Requirements:
+1. Build Punjabi-English Phrase Generator
+   - Input: English word
+   - Output: "Yaar yeh [WORD] bohot [RANDOM_ADJECTIVE] hai!"
+   - Use array of Punjabi adjectives: ['shandaar', 'kamaal', 'zabardast', 'lajawab']
+   - Random selection using Math.random()
+2. Demonstrate at least 5 different string methods in meaningful contexts
+3. Create multi-line template for restaurant menu display
+4. Include string validation checking for empty input using trim() and includes()
+5. GitHub commit: "Day 03: Template Literals - Dynamic string generation with modern syntax"
+
+Oral Examination Questions:
+1. CONCEPTUAL: "Template literals aur concatenation mein performance difference hai? Bade projects mein kaunsa better hai aur kyun? Readability ka kya role hai?"
+2. TEACHING-BACK: "Explain to your younger brother how ${} works inside backticks. Use simple example like making a sentence with your name and age."
+3. APPLICATION: Fix and improve this code:
+```javascript
+const user = "  ali  ";
+const city = "lahore";
+const msg = "hello " + user + " from " + city;
+// Make it use template literal, capitalize properly, handle extra spaces
+```
+
+---
+
+DAY 4 - DECEMBER 5, 2025 (THURSDAY)
+Topic: Destructuring (Array & Object) and Spread Operator
+
+Learning Objectives:
+- Extract values from arrays and objects using destructuring
+- Use spread operator for copying and merging data structures
+- Apply default values in destructuring
+- Understand shallow vs deep copying implications
+
+Lahore Analogy:
+"Destructuring aise hai jaise tum Liberty Books se shopping bag layi jismein 10 items hain. Tum poori bag table pe nahi rakhte, sirf jo chahiye woh nikal lete ho: const {book, pen, diary} = shoppingBag. Spread operator aise hai jaise do shopping bags ko ek bade bag mein daal dena bina unpacking kiye: const bigBag = {...bag1, ...bag2}. Sab cheezain ek jagah aa gayin efficiently."
+
+Technical Explanation:
+
+Object Destructuring:
+```javascript
+// Basic object destructuring
+const restaurant = {
+  name: "Bundu Khan",
+  location: "MM Alam Road",
+  rating: 4.5,
+  cuisine: "Pakistani"
+};
+
+// Instead of this:
+const name = restaurant.name;
+const location = restaurant.location;
+
+// Do this:
+const { name, location } = restaurant;
+
+// With different variable names
+const { name: restaurantName, rating: stars } = restaurant;
+
+// With default values
+const { wifi = false } = restaurant; // wifi will be false if not in object
+
+// Nested destructuring
+const menu = {
+  appetizers: { samosa: 50, roll: 80 },
+  mainCourse: { biryani: 350 }
+};
+const { appetizers: { samosa, roll } } = menu;
+```
+
+Array Destructuring:
+```javascript
+// Basic array destructuring
+const cities = ["Lahore", "Karachi", "Islamabad"];
+const [first, second, third] = cities;
+
+// Skip elements
+const [lahore, , islamabad] = cities; // skips Karachi
+
+// Rest operator with destructuring
+const numbers = [1, 2, 3, 4, 5];
+const [one, two, ...rest] = numbers; // rest = [3, 4, 5]
+
+// Swapping variables
+let a = 5, b = 10;
+[a, b] = [b, a]; // Now a = 10, b = 5
+```
+
+Spread Operator:
+```javascript
+// Array spreading
+const pakistaniCities = ["Lahore", "Karachi"];
+const moreCities = ["Islamabad", "Peshawar"];
+const allCities = [...pakistaniCities, ...moreCities];
+
+// Array copying (shallow copy)
+const original = [1, 2, 3];
+const copy = [...original]; // Independent copy for primitives
+
+// Object spreading
+const basicMenu = { biryani: 350, karahi: 500 };
+const drinksMenu = { coke: 50, lassi: 100 };
+const fullMenu = { ...basicMenu, ...drinksMenu };
+
+// Adding/overriding properties
+const restaurant = { name: "Howdy", rating: 4.0 };
+const updated = { ...restaurant, rating: 4.5, delivery: true };
+
+// Shallow copy warning
+const nested = { user: { name: "Ali", city: { name: "Lahore" } } };
+const copy = { ...nested }; // Only top level is copied!
+copy.user.name = "Ahmed"; // This changes original too!
+```
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Given object { name: "Ali", age: 20, city: "Lahore", phone: "0300-1234567" }, use destructuring to extract name and city only. Swap two variables using array destructuring.
+
+TIER 2 (10-15 min): Integration
+Problem: Create two restaurant menu objects (starters and mains). Merge them using spread. Add delivery charges property. Extract specific items using destructuring.
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Build shopping cart system where:
+- addItem function takes cart and new item, returns new cart using spread (immutability)
+- updateQuantity function takes item object, uses destructuring to extract id and quantity
+- Demonstrate that original cart remains unchanged after operations
+
+Daily Task (Required for Proof of Work):
+Create file: day04-destructuring-spread.js
+Requirements:
+1. Create Fort Restaurant nested menu object:
+```javascript
+const fortMenu = {
+  starters: {
+    samosa: 50,
+    pakora: 60,
+    roll: 80
+  },
+  mainCourse: {
+    desi: { biryani: 350, karahi: 500, nihari: 450 },
+    chinese: { friedRice: 300, noodles: 250 }
+  },
+  beverages: ["lassi", "coke", "juice"],
+  specialOffer: { discount: 15, minOrder: 1000 }
+};
+```
+2. Use destructuring to extract:
+   - All starter items
+   - Biryani price from nested structure
+   - First two beverages
+   - Discount percentage with default value of 10 if missing
+3. Create second restaurant menu, merge with Fort menu using spread
+4. Demonstrate shallow copy problem with nested object
+5. Implement swap functionality for two menu items
+6. GitHub commit: "Day 04: Destructuring & Spread - Elegant data manipulation"
+
+Oral Examination Questions:
+1. CONCEPTUAL: "Spread operator shallow copy banata hai ya deep copy? Agar nested objects hain toh kya problem aa sakti hai? Real MERN project mein yeh issue kab face hoga?"
+2. TEACHING-BACK: "Explain destructuring to someone familiar with normal variable assignment. Why is const {name} = user better than const name = user.name when dealing with multiple properties?"
+3. APPLICATION: What will happen here and why?
+```javascript
+const cart = { items: [{ id: 1, name: "Phone" }], total: 50000 };
+const newCart = { ...cart };
+newCart.items.push({ id: 2, name: "Case" });
+console.log(cart.items.length); // What will this be? Why?
+```
+
+---
+
+DAY 5 - DECEMBER 6, 2025 (FRIDAY)
+Topic: ES6 Modules (import/export)
+
+Learning Objectives:
+- Organize code across multiple files using modules
+- Use named exports and default exports appropriately
+- Understand module scope and encapsulation
+- Structure projects with modular architecture
+
+Lahore Analogy:
+"Modules Gulberg ke different shops ki tarah hain. Har shop apna specific kaam karta hai - ek mein kapray, ek mein electronics, ek mein khana. Har shop (module) apne products (functions/variables) ko export karti hai jo customers (other modules) import kar sakte hain. Agar sab ek hi jagah hota (one big file) toh Mall mein sab confused hote. Modules se har functionality ki apni jagah hai, dhundna easy hai, maintain karna simple hai."
+
+Technical Explanation:
+
+Named Exports:
+```javascript
+// mathUtils.js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+export const multiply = (a, b) => a * b;
+
+// Importing named exports
+import { add, subtract } from './mathUtils.js';
+// Or import all
+import * as MathUtils from './mathUtils.js';
+MathUtils.add(5, 3);
+```
+
+Default Exports:
+```javascript
+// calculator.js
+const calculator = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b
+};
+export default calculator;
+
+// Importing default export (can name it anything)
+import calc from './calculator.js';
+import myCalculator from './calculator.js'; // Also valid
+```
+
+Mixed Exports:
+```javascript
+// userService.js
+export const getAllUsers = () => { /* ... */ };
+export const getUserById = (id) => { /* ... */ };
+const userService = { getAllUsers, getUserById };
+export default userService;
+
+// Importing
+import userService, { getAllUsers } from './userService.js';
+```
+
+Module Benefits:
+✅ Code organization - related functions grouped together
+✅ Reusability - import same module in multiple files
+✅ Namespace management - avoid global scope pollution
+✅ Encapsulation - only export what should be public
+✅ Dependency management - clear file dependencies
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Create two files - one exporting three functions (add, subtract, multiply), another importing and using them. Demonstrate both named and default exports.
+
+TIER 2 (10-15 min): Integration
+Problem: Create restaurant module with menu, pricing, and order functions. Create separate bill calculator module. Import restaurant data in calculator module to compute bill with tax.
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Refactor a 200-line monolithic file into proper module structure:
+- constants.js for configuration
+- utils.js for helper functions
+- main.js importing and using both
+
+Daily Task (Required for Proof of Work):
+Create folder: day05-modules/
+Files required:
+1. app.js - Main application file
+2. domHelpers.js - DOM manipulation utilities
+3. taskLogic.js - Task CRUD operations
+
+Requirements:
+Refactor your previous DOM ToDo List into modular architecture:
+
+domHelpers.js should export:
+- getElementById wrapper
+- createElement wrapper
+- appendElement function
+- removeElement function
+- updateElement function
+
+taskLogic.js should export:
+- addTask function
+- deleteTask function
+- editTask function
+- Tasks array or object
+
+app.js should:
+- Import from both modules
+- Wire up UI to logic
+- Keep clean and minimal
+
+4. Create index.html that loads app.js as module:
+```html
+<script type="module" src="app.js"></script>
+```
+5. Include README explaining module structure and benefits
+6. GitHub commit: "Day 05: ES6 Modules - Organize code for scalability"
+
+Oral Examination Questions:
+1. CONCEPTUAL: "ES6 modules aur CommonJS (require/module.exports) mein kya farq hai? MERN stack mein dono kahan use hote hain - frontend mein kaunsa aur backend mein kaunsa?"
+2. TEACHING-BACK: "Explain to non-programmer why splitting 500 lines of code into 5 files of 100 lines each is better. Use Lahore city organization analogy - why do we have different areas for different purposes?"
+3. APPLICATION: Debug this module setup:
+```javascript
+// utils.js
+export default const add = (a, b) => a + b; // What's wrong?
+
+// app.js
+import add from './utils'; // What's missing?
+add(2, 3);
+```
+
+---
+
+DAY 6-7 - DECEMBER 7-8, 2025 (SATURDAY-SUNDAY)
+Project: Console ToDo List Application (Pure Logic Focus)
+
+Project Goal:
+Build complete task management system using ONLY JavaScript logic without DOM interaction. This project cements understanding of variables, functions, arrays, and ES6 features before introducing browser complexity.
+
+Project Requirements:
+
+FEATURES (All Required):
+1. Add Task - Create task with title, description, priority (low/medium/high), timestamp
+2. View All Tasks - Display all tasks formatted in console
+3. Edit Task - Modify existing task by ID
+4. Delete Task - Remove task from array
+5. Mark Complete/Incomplete - Toggle task completion status
+6. Filter by Priority - Show only tasks matching priority level
+7. Search Tasks - Find tasks containing keyword in title or description
+8. Task Counter - Show total, completed, and pending counts
+
+TECHNICAL CONSTRAINTS:
+- No DOM manipulation (console.log only for output)
+- Use array of objects to store tasks
+- Each task must have unique ID (use timestamp or counter)
+- Use array methods (.map, .filter, .find, .some) wherever possible instead of traditional loops
+- Implement at least 5 separate well-named functions showing single responsibility
+- Use const for functions and task array, let only where necessary
+- Demonstrate template literals for formatted output
+- Use destructuring in function parameters where appropriate
+
+TASK OBJECT STRUCTURE:
+```javascript
+const task = {
+  id: Date.now(),
+  title: "Learn React",
+  description: "Complete React fundamentals",
+  priority: "high",
+  completed: false,
+  createdAt: new Date().toISOString()
+};
+```
+
+DAY 6 (SATURDAY) FOCUS:
+Core functionality implementation:
+- Set up task array and ID management
+- Implement add task function
+- Implement view all tasks with formatting
+- Implement delete task by ID
+- Implement mark complete toggle
+- Test with at least 5 diverse tasks
+
+Expected Output Examples:
+```
+========== MY TASKS ==========
+ID: 1701234567890
+Title: Learn JavaScript Scope
+Description: Master var, let, const differences
+Priority: HIGH
+Status: Pending
+Created: 2025-12-07T09:30:00Z
+-----------------------------
+Total Tasks: 5 | Completed: 2 | Pending: 3
+=============================
+```
+
+DAY 7 (SUNDAY) FOCUS:
+Advanced features and polish:
+- Implement edit task functionality
+- Implement filter by priority
+- Implement search by keyword
+- Add input validation (empty title check, valid priority values)
+- Improve console output formatting
+- Write comprehensive README.md:
+  - Project description
+  - Feature list with explanations
+  - Code structure explanation
+  - Sample usage commands
+  - What you learned reflection (minimum 100 words on key takeaways)
+  - Challenges faced and solutions
+- Push to GitHub with proper commit messages:
+  - "Day 06: ToDo Console App - Core functionality"
+  - "Day 07: ToDo Console App - Complete with advanced features"
+
+TESTING REQUIREMENTS:
+Create test scenarios demonstrating:
+1. Adding 5 different tasks with varied priorities
+2. Marking 2 as complete
+3. Filtering to show only high priority
+4. Searching for tasks containing specific keyword
+5. Editing a task's description
+6. Deleting a task
+7. Viewing final state with counters
+
+CODE QUALITY CHECKLIST:
+✅ All functions have clear descriptive names
+✅ No function exceeds 20 lines
+✅ Comments explain WHY not WHAT
+✅ Consistent naming convention (camelCase)
+✅ No magic numbers (use named constants)
+✅ Error handling for edge cases (empty arrays, invalid IDs)
+
+WEEK ONE EXIT EXAMINATION (MANDATORY - BLOCKS WEEK TWO):
+After completing Day 7 project, answer these three questions:
+
+QUESTION 1 - CONCEPTUAL DEEP DIVE:
+"Explain const with objects using detailed Lahore analogy. Main ne likha: const cart = {items: []}. Phir main ne cart.items.push('apple') kiya. Error kyun nahi aayi jabke const reassignment allow nahi karta? Ab agar main cart = {} likhun toh error kyun aayega? Iska MERN development mein kya practical importance hai jab React mein state management karoge?"
+
+Pass Criteria: Must explain that const prevents variable reassignment but not object mutation, must use clear Lahore analogy (like house address cannot change but furniture inside can), must connect to React immutability concepts.
+
+QUESTION 2 - CODE CHALLENGE (15 minutes):
+```javascript
+// Given this data:
+const prices = [100, 200, 300, 150, 250];
+const discount = 0.1;
+
+// Task 1: Create new array with 10% discount applied (use arrow function and map)
+// Expected: [90, 180, 270, 135, 225]
+
+// Task 2: Create new array with only prices under 200 after discount (chain filter)
+// Expected: [90, 135]
+
+// Task 3: Calculate average of discounted prices under 200
+// Expected: 112.5
+
+// Complete in one statement chain using map, filter, reduce
+```
+
+Pass Criteria: Must complete all three tasks, must use arrow functions, must chain methods correctly, must execute without errors.
+
+QUESTION 3 - REAL-WORLD APPLICATION:
+"Agar tum Bykea ka rider tracking system bana rahe ho jahan har rider ka data hai: {name, location: {lat, lng}, status: 'available'/'busy', rating}. Tumhe yeh features chahiye:
+1. Available riders dhundna
+2. Riders ko rating ke mutabiq sort karna
+3. Top 3 riders select karna
+4. Unka summary object banana with just name and rating
+
+Konse ES6 features use karoge? Destructuring kahan? Spread kahan? Arrow functions kyun? Modules kaise organize karoge? Step by step batao approach with code examples."
+
+Pass Criteria: Must identify appropriate ES6 features for each requirement, must show understanding of when to use which feature, must provide working code structure.
+
+TO PASS WEEK ONE EXAMINATION:
+- Must pass at least 2 out of 3 questions convincingly
+- Code challenge must execute without errors
+- Explanations must show genuine understanding not memorization
+
+IF PASSED:
+"Mashallah Sharjeel! Week 1 complete ho gaya. Tumhari ES6 foundation solid ban gayi hai. Yeh features tumhe professional developer ki tarah code karne dete hain. Ab kal se Week 2 mein array methods ka asli power dekhoge - map, filter, reduce jo React mein har jagah use hote hain. Aaj raat relax karo, kal subah 5:30 tayyar rehna. Allah tumhare saath hai!"
+IF FAILED:
+"Beta, foundation mein kuch gaps hain jo aage ja kar problem banegi. Week 1 dobara karna padega lekin yeh tumhare favour mein hai. Jab yeh concepts crystal clear honge tab React aur Node bohot easy lagega. Kal se December 2 wali schedule dobara start hogi. Shortcuts nahi, mastery chahiye. Main tumhare saath hoon."
+
+WEEK TWO: ARRAY METHODS MASTERY (THE TRANSFORMATION MINDSET)
+Dates: December 9-15, 2025
+Goal: Master functional programming with array methods - think in data transformations not loops
+DAY 8 - DECEMBER 9, 2025 (MONDAY)
+Topic: forEach and for...of Loops (Foundation for Array Methods)
+Learning Objectives:
+
+Understand when to use forEach vs for...of
+Recognize that forEach is for side effects, not transformation
+Prepare mental model for map (which returns new array unlike forEach)
+Practice basic array iteration patterns
+
+Lahore Analogy:
+"forEach aise hai jaise tum MM Alam Road ki har dukaan pe jaa rahe ho aur register mein entry kar rahe ho - dukandar ka naam aur number note kar rahe ho (side effects, actions). Tum koi naya list nahi bana rahe, bas existing cheezain pe action perform kar rahe ho. for...of aise hai jaise tum bas window shopping kar rahe ho - har dukaan dekh rahe ho lekin koi specific action nahi kar rahe, sirf values dekh rahe ho. Dono ka different purpose hai."
+Technical Explanation:
+forEach - For Side Effects:
+javascriptconst restaurants = ["Bundu Khan", "Howdy", "Jade Cafe"];
+
+// forEach when you want to DO something with each element
+restaurants.forEach((restaurant, index) => {
+  console.log(`${index + 1}. ${restaurant}`);
+});
+
+// forEach with array of objects
+const orders = [
+  { id: 1, item: "Biryani", price: 350 },
+  { id: 2, item: "Karahi", price: 500 }
+];
+
+let total = 0;
+orders.forEach(order => {
+  total += order.price; // Side effect - modifying external variable
+  console.log(`Processing order ${order.id}`);
+});
+for...of - For Simple Iteration:
+javascript// for...of when you only care about values, cleaner syntax
+const cities = ["Lahore", "Karachi", "Islamabad"];
+
+for (const city of cities) {
+  console.log(city); // No index needed, cleaner
+}
+
+// Can use with destructuring
+const products = [
+  { name: "Phone", price: 50000 },
+  { name: "Laptop", price: 120000 }
+];
+
+for (const { name, price } of products) {
+  console.log(`${name}: Rs. ${price}`);
+}
+```
+
+Key Differences:
+forEach:
+- Method on arrays
+- Provides index and array as additional parameters
+- Cannot use break or continue
+- Better when you need index
+
+for...of:
+- Can use with any iterable (arrays, strings, Maps, Sets)
+- Cleaner syntax when you only need values
+- Can use break and continue
+- Can use with await for async operations
+
+⚠️ Important: Neither forEach nor for...of RETURN anything. If you want to create new array, use map() (tomorrow's topic).
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Given array of 5 product prices [100, 250, 500, 150, 300], use forEach to:
+1. Calculate total
+2. Print each price with "Rs." prefix
+3. Count how many prices are above 200
+
+TIER 2 (10-15 min): Integration
+Problem: Array of student objects with name and marks. Use for...of with destructuring to print formatted report. Use forEach to calculate class average.
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Shopping cart with items array. Use forEach to:
+- Add 17% GST to each item's price (mutation)
+- Generate receipt string with all items
+- Calculate total
+Then compare: could this be done better with other methods? (Foreshadowing map and reduce)
+
+Daily Task (Required for Proof of Work):
+Create file: day08-foreach-forof.js
+Requirements:
+1. Create shopping cart array with 10 items (name, price, quantity, category)
+2. Use forEach to calculate grand total including 17% GST
+3. Use for...of to display formatted receipt:
+```
+========== RECEIPT ==========
+1. Biryani x2 - Rs. 700
+2. Coke x3 - Rs. 150
+...
+Subtotal: Rs. XXXX
+GST (17%): Rs. XXX
+Grand Total: Rs. XXXX
+============================
+
+Compare performance mentally: which is more readable for this use case?
+Include comments explaining when you would choose forEach vs for...of
+GitHub commit: "Day 08: forEach and for...of - Foundation for array iteration"
+
+Oral Examination Questions:
+
+CONCEPTUAL: "forEach aur map mein kya farq hai? Hint: forEach kuch return nahi karta. Kal jab map seekhoge tab yeh farq clear hoga. Abhi batao forEach ka purpose kya hai?"
+TEACHING-BACK: "Explain forEach to someone who only knows traditional for loop. Why would you use forEach(item => ...) instead of for(let i=0; i<arr.length; i++)?"
+APPLICATION: What's wrong with this code?
+
+javascriptconst doubled = [];
+[1,2,3,4,5].forEach(num => {
+  doubled.push(num * 2);
+});
+// This works but is there a better way? (Hint: tomorrow's map)
+
+DAY 9 - DECEMBER 10, 2025 (TUESDAY)
+Topic: .map() - The Transformation Machine (Most Important Array Method)
+Learning Objectives:
+
+Understand that map creates NEW array by transforming each element
+Never mutate original array - embrace immutability
+Chain map with other methods
+Recognize when map is appropriate vs forEach
+
+Lahore Analogy:
+"Map aise hai jaise Ferozepur Road pe toll plaza. Har gaari wahan se guzarti hai aur tax pay karti hai. Original gaariyan change nahi hoti, lekin har gaari se ek receipt milti hai. Purani gaariyon ka array safe hai (immutability), naya receipts ka array alag ban gaya hai. Map HAMESHA nayi cheez banata hai - original ko touch nahi karta. Yeh React aur modern JavaScript ka golden rule hai."
+Technical Explanation:
+map() - Core Behavior:
+javascript// map ALWAYS returns new array of same length
+const prices = [100, 200, 300];
+const withTax = prices.map(price => price * 1.17);
+console.log(prices); // [100, 200, 300] - UNCHANGED!
+console.log(withTax); // [117, 234, 351] - NEW ARRAY
+
+// map with objects
+const products = [
+  { name: "Phone", price: 50000 },
+  { name: "Laptop", price: 120000 }
+];
+
+// Extract just names
+const names = products.map(product => product.name);
+// ["Phone", "Laptop"]
+
+// Add discount property (create new objects!)
+const discounted = products.map(product => ({
+  ...product,
+  discountedPrice: product.price * 0.9
+}));
+// Original products array unchanged!
+map() vs forEach():
+javascript// forEach - for side effects, returns undefined
+const doubled1 = [];
+[1,2,3].forEach(num => {
+  doubled1.push(num * 2); // Manual push, mutating external array
+});
+
+// map - for transformation, returns new array
+const doubled2 = [1,2,3].map(num => num * 2); // Clean, functional
+Common Patterns:
+javascript// Pattern 1: Extract property
+const users = [{name: "Ali", age: 20}, {name: "Sara", age: 22}];
+const ages = users.map(user => user.age);
+
+// Pattern 2: Transform values
+const numbers = [1, 2, 3, 4, 5];
+const squares = numbers.map(n => n * n);
+
+// Pattern 3: Format strings
+const cities = ["lahore", "karachi"];
+const formatted = cities.map(city => city.toUpperCase());
+
+// Pattern 4: Add new properties
+const items = [{name: "Pen", price: 50}];
+const withGST = items.map(item => ({
+  ...item,
+  priceWithGST: item.price * 1.17
+}));
+
+// Pattern 5: Transform with index
+const items = ["First", "Second", "Third"];
+const numbered = items.map((item, index) => `${index + 1}. ${item}`);
+Method Chaining:
+javascriptconst prices = [100, 200, 300, 150];
+
+// Chain map methods
+const result = prices
+  .map(price => price * 1.17) // Add tax
+  .map(price => Math.round(price)) // Round
+  .map(price => `Rs. ${price}`); // Format
+// ["Rs. 117", "Rs. 234", "Rs. 351", "Rs. 176"]
+⚠️ Common Mistakes:
+javascript// WRONG - Forgetting return in explicit block
+const wrong = [1,2,3].map(n => {
+  n * 2; // No return!
+});
+// [undefined, undefined, undefined]
+
+// CORRECT
+const correct = [1,2,3].map(n => {
+  return n * 2; // Explicit return needed with {}
+});
+
+// WRONG - Mutating original
+const products = [{name: "Phone", price: 1000}];
+const bad = products.map(product => {
+  product.price *= 2; // MUTATING ORIGINAL!
+  return product;
+});
+
+// CORRECT - Creating new objects
+const good = products.map(product => ({
+  ...product,
+  price: product.price * 2
+}));
+Three-Tier Practice Problems:
+TIER 1 (5-10 min): Direct Application
+Problem: Array of 10 prices in dollars [10, 20, 30...]. Convert to PKR (multiply by 280). Then chain another map to add "Rs." prefix.
+TIER 2 (10-15 min): Integration
+Problem: Array of student objects {name, marks}. Use map to:
+
+Create new array adding grade property based on marks (90+ = A, 80+ = B, etc.)
+Chain another map to create summary strings: "Ali: 95 marks, Grade A"
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: API returns users with messy data:
+javascript[
+  {full_name: "  ali ahmed  ", email: "ALI@EXAMPLE.COM", age: "20"},
+  ...
+]
+Use map to clean and transform to:
+javascript[
+  {name: "Ali Ahmed", email: "ali@example.com", age: 20, adult: true},
+  ...
+]
+Daily Task (Required for Proof of Work):
+Create file: day09-map-mastery.js
+Requirements:
+
+Create product catalog array with 15 items:
+
+javascript{name: "Item", basePrice: number, category: "electronics"/"clothing"/etc}
+
+Use map to add 15% tax creating new array with finalPrice property
+Chain another map to format prices as "Rs. 1,234" (with comma separator)
+Demonstrate original array remains unchanged by logging before and after
+Create comparison showing same task with forEach vs map highlighting why map is cleaner
+Include at least 3 different map patterns from examples above
+GitHub commit: "Day 09: map() Mastery - Transform data functionally"
+
+Oral Examination Questions:
+
+CONCEPTUAL: "Map kyun nayi array return karta hai original ko modify karne ke bajaye? React mein yeh immutability kyun zaroori hai? Agar tum original array mutate karo toh kya problem aa sakti hai?"
+TEACHING-BACK: "Chhote bhai ko explain karo: agar tumhare paas 10 students ki list hai aur tumhe har student ke marks mein 5 bonus marks add karne hain, toh map kaise use karoge? Original list safe kaise rahegi?"
+APPLICATION: Fix and explain:
+
+javascriptconst prices = [100, 200, 300];
+const doubled = prices.map(price => {
+  price * 2 // What's missing?
+});
+console.log(doubled); // Why undefined?
+
+DAY 10 - DECEMBER 11, 2025 (WEDNESDAY)
+Topic: .filter() - The Bouncer (Selective Array Creation)
+Learning Objectives:
+
+Create new arrays containing only elements passing a test
+Understand filter can return empty array or smaller array
+Chain filter with map for powerful data pipelines
+Recognize filter's role in search and conditional display features
+
+Lahore Analogy:
+"Filter aise hai jaise Liberty Books pe sale section. Store mein 1000 books hain, lekin tum sirf woh chahte ho jo 500 Rs se kam hain. Filter tumhara bouncer hai - woh har book ko check karega (test condition), jo criteria match karti hai woh naye array mein jayegi, jo nahi match karti woh reject ho jayegi. Original 1000 books wahan hi hain shelf pe (immutability), tumhare paas ek choti filtered list aa gayi hai."
+Technical Explanation:
+filter() - Core Behavior:
+javascript// filter() returns NEW array with elements that pass test
+// Always returns boolean from callback
+
+const prices = [50, 150, 300, 75, 500, 120];
+const affordable = prices.filter(price => price < 200);
+console.log(affordable); // [50, 150, 75, 120]
+console.log(prices); // Original unchanged
+
+// Can return empty array
+const expensive = prices.filter(price => price > 1000);
+console.log(expensive); // []
+
+// With objects
+const students = [
+  { name: "Ali", marks: 85 },
+  { name: "Sara", marks: 45 },
+  { name: "Ahmed", marks: 92 }
+];
+
+const passed = students.filter(student => student.marks >= 50);
+// [{ name: "Ali", marks: 85 }, { name: "Ahmed", marks: 92 }]
+Multiple Conditions:
+javascriptconst restaurants = [
+  { name: "Bundu Khan", rating: 4.5, deliveryTime: 30, minOrder: 500 },
+  { name: "Howdy", rating: 3.8, deliveryTime: 45, minOrder: 300 },
+  { name: "Jade", rating: 4.2, deliveryTime: 25, minOrder: 400 }
+];
+
+// Filter with multiple AND conditions
+const goodAndFast = restaurants.filter(r => 
+  r.rating >= 4.0 && r.deliveryTime < 35
+);
+
+// Filter with OR conditions
+const cheapOrFast = restaurants.filter(r =>
+  r.minOrder < 400 || r.deliveryTime < 30
+);
+Chaining filter() with map():
+javascriptconst products = [
+  { name: "Phone", price: 50000, inStock: true },
+  { name: "Laptop", price: 120000, inStock: false },
+  { name: "Mouse", price: 1500, inStock: true },
+  { name: "Keyboard", price: 3000, inStock: true }
+];
+
+// Filter THEN map - common pattern
+const affordableNames = products
+  .filter(p => p.price < 10000 && p.inStock)
+  .map(p => p.name);
+// ["Mouse", "Keyboard"]
+
+// Order matters!
+const result1 = [1,2,3,4,5]
+  .filter(n => n > 2)  // [3,4,5]
+  .map(n => n * 2);    // [6,8,10]
+
+const result2 = [1,2,3,4,5]
+  .map(n => n * 2)     // [2,4,6,8,10]
+  .filter(n => n > 4); // [6,8,10]
+// Different results! Filter first = more efficient
+filter() vs find():
+javascriptconst users = [
+  { id: 1, name: "Ali" },
+  { id: 2, name: "Sara" },
+  { id: 3, name: "Ahmed" }
+];
+
+// filter() returns ARRAY (even if one match)
+const filtered = users.filter(u => u.id === 2);
+// [{ id: 2, name: "Sara" }] - Array!
+
+// find() returns FIRST matching ELEMENT (not array)
+const found = users.find(u => u.id === 2);
+// { id: 2, name: "Sara" } - Object!
+
+// When to use which:
+// filter: Need all matches, or checking if any exist
+// find: Need first match only, or checking if specific item exists
+Common Patterns:
+javascript// Pattern 1: Search functionality
+const searchBooks = (books, keyword) => {
+  const lower = keyword.toLowerCase();
+  return books.filter(book => 
+    book.title.toLowerCase().includes(lower) ||
+    book.author.toLowerCase().includes(lower)
+  );
+};
+
+// Pattern 2: Remove items
+const removeItem = (cart, itemId) => {
+  return cart.filter(item => item.id !== itemId);
+};
+
+// Pattern 3: Get unique values (with filter + indexOf)
+const numbers = [1, 2, 2, 3, 3, 3, 4];
+const unique = numbers.filter((num, index, arr) => 
+  arr.indexOf(num) === index
+);
+// [1, 2, 3, 4]
+
+// Pattern 4: Conditional inclusion
+const getVisibleTasks = (tasks, showCompleted) => {
+  if (showCompleted) return tasks;
+  return tasks.filter(task => !task.completed);
+};
+Three-Tier Practice Problems:
+TIER 1 (5-10 min): Direct Application
+Problem: Array of 20 numbers. Filter only even numbers. Then filter only numbers between 10 and 50.
+TIER 2 (10-15 min): Integration
+Problem: Array of restaurant objects with name, rating, cuisine, price. Filter restaurants that are:
+
+Rating >= 4.0 AND price <= 500
+Cuisine is "Pakistani" OR "Chinese"
+Chain with map to get only names of filtered restaurants.
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: E-commerce product filtering:
+javascriptconst products = [/* 30 products with name, price, category, inStock, rating */];
+Implement filterProducts(products, filters) where filters is:
+javascript{
+  maxPrice: 5000,
+  categories: ["electronics", "books"],
+  inStockOnly: true,
+  minRating: 4.0
+}
+Handle optional filters (if filter not provided, don't apply that condition).
+Daily Task (Required for Proof of Work):
+Create file: day10-filter-mastery.js
+Requirements:
+
+Create Liberty Books inventory with 25 books:
+
+javascript{
+  title: string,
+  author: string,
+  price: number,
+  inStock: boolean,
+  category: "fiction"/"tech"/"business"/etc,
+  rating: number (1-5)
+}
+
+Filter books under 1000 Rs that are in stock
+Chain with map to extract only titles, creating array of affordable available book names
+Implement search function that filters by BOTH category AND price range:
+
+javascriptconst searchBooks = (books, category, maxPrice) => {
+  // Return filtered and mapped result
+};
+
+Demonstrate filter returning empty array when no matches
+Compare filter length before and after to show how many items were removed
+Create advanced filter combining 3+ conditions with AND/OR logic
+GitHub commit: "Day 10: filter() Mastery - Selective data extraction"
+
+Oral Examination Questions:
+
+CONCEPTUAL: "Filter aur find mein kya farq hai? Dono condition check karte hain. Agar tumhe shopping cart mein specific item dhundni hai by ID, toh konsa use karoge? Agar tumhe Rs. 500 se kam ki sab items chahiye, toh konsa?"
+TEACHING-BACK: "Explain filter to someone who knows loops. Why is products.filter(p => p.price < 1000) better than manually looping and pushing to new array?"
+APPLICATION: What will this return and why?
+
+javascriptconst nums = [5, 10, 15, 20];
+const result = nums
+  .filter(n => n > 8)
+  .map(n => n * 2)
+  .filter(n => n < 35);
+// Step through execution
+
+DAY 11 - DECEMBER 12, 2025 (THURSDAY)
+Topic: .reduce() - The Accountant (Most Powerful & Complex Array Method)
+Learning Objectives:
+
+Understand accumulator pattern - reducing array to single value
+Use reduce for calculations, finding max/min, grouping data
+Recognize reduce can return ANY type (number, string, object, array)
+Know when reduce is overkill vs when it's the perfect tool
+
+Lahore Analogy:
+"Reduce aise hai jaise month end pe tumhare paas 30 din ki expense receipts hain. Tum ek ek receipt uthate ho aur running total calculate karte jao. Pehli receipt: 0 + 100 = 100 (accumulator ab 100 hai). Doosri receipt: 100 + 250 = 350 (accumulator ab 350 hai). Tisri receipt: 350 + 80 = 430. End mein tumhare paas ek final total hai - 30 receipts ek number ban gayin. Yeh 'reduction' hai - bohot data ko ek value mein convert karna."
+Technical Explanation:
+reduce() - Basic Syntax:
+javascriptarray.reduce((accumulator, currentValue, index, array) => {
+  // Return new accumulator value
+}, initialValue);
+
+// accumulator: Running total/result being built
+// currentValue: Current array element being processed
+// initialValue: Starting value for accumulator (IMPORTANT!)
+Simple Sum Example - Step by Step:
+javascriptconst prices = [100, 200, 300];
+const total = prices.reduce((acc, price) => {
+  console.log(`Acc: ${acc}, Price: ${price}`);
+  return acc + price;
+}, 0);
+
+// Execution:
+// Initial: acc = 0 (initial value)
+// Step 1: acc = 0, price = 100 → return 0 + 100 = 100
+// Step 2: acc = 100, price = 200 → return 100 + 200 = 300
+// Step 3: acc = 300, price = 300 → return 300 + 300 = 600
+// Final: 600
+Common Patterns:
+Pattern 1 - Sum/Calculate:
+javascriptconst cart = [
+  { item: "Biryani", price: 350, qty: 2 },
+  { item: "Coke", price: 50, qty: 3 }
+];
+
+const total = cart.reduce((sum, item) => {
+  return sum + (item.price * item.qty);
+}, 0);
+// 0 + 700 + 150 = 850
+Pattern 2 - Find Max/Min:
+javascriptconst prices = [100, 500, 250, 800, 150];
+
+const max = prices.reduce((highest, price) => {
+  return price > highest ? price : highest;
+}, prices[0]);
+// Without Math.max, pure reduce approach
+
+const min = prices.reduce((lowest, price) => {
+  return price < lowest ? price : lowest;
+}, prices[0]);
+Pattern 3 - Count Occurrences:
+javascriptconst fruits = ["apple", "banana", "apple", "orange", "banana", "apple"];
+
+const count = fruits.reduce((acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+}, {});
+// { apple: 3, banana: 2, orange: 1 }
+Pattern 4 - Group by Property:
+javascriptconst products = [
+  { name: "Phone", category: "electronics" },
+  { name: "Shirt", category: "clothing" },
+  { name: "Laptop", category: "electronics" }
+];
+
+const grouped = products.reduce((acc, product) => {
+  const cat = product.category;
+  if (!acc[cat]) acc[cat] = [];
+  acc[cat].push(product);
+  return acc;
+}, {});
+/*
+{
+  electronics: [{Phone}, {Laptop}],
+  clothing: [{Shirt}]
+}
+*/
+Pattern 5 - Flatten Array:
+javascriptconst nested = [[1, 2], [3, 4], [5, 6]];
+
+const flat = nested.reduce((acc, arr) => {
+  return acc.concat(arr);
+}, []);
+// [1, 2, 3, 4, 5, 6]
+Pattern 6 - Build Object from Array:
+javascriptconst users = [
+  { id: 1, name: "Ali" },
+  { id: 2, name: "Sara" }
+];
+
+const usersById = users.reduce((acc, user) => {
+  acc[user.id] = user;
+  return acc;
+}, {});
+// { 1: {id:1, name:"Ali"}, 2: {id:2, name:"Sara"} }
+⚠️ Common Mistakes:
+javascript// WRONG - No initial value with empty array
+const sum = [].reduce((a, b) => a + b); // ERROR!
+
+// CORRECT - Always provide initial value
+const sum = [].reduce((a, b) => a + b, 0); // Returns 0
+
+// WRONG - Forgetting to return accumulator
+const wrong = [1,2,3].reduce((acc, num) => {
+  acc + num; // No return!
+}, 0);
+// Returns undefined
+
+// CORRECT
+const correct = [1,2,3].reduce((acc, num) => {
+  return acc + num;
+}, 0);
+reduce() vs map/filter:
+javascript// These are equivalent:
+
+// Using map + filter + reduce (clearer)
+const result1 = numbers
+  .filter(n => n > 5)
+  .map(n => n * 2)
+  .reduce((sum, n) => sum + n, 0);
+
+// Using only reduce (more compact but less readable)
+const result2 = numbers.reduce((sum, n) => {
+  if (n > 5) return sum + (n * 2);
+  return sum;
+}, 0);
+
+// Rule: Use map/filter/reduce when it's clearer
+// Use only reduce when performance critical or genuinely simpler
+Three-Tier Practice Problems:
+TIER 1 (5-10 min): Direct Application
+Problem: Array of 10 numbers. Use reduce to:
+
+Calculate sum
+Calculate product (multiply all)
+Find maximum value
+
+TIER 2 (10-15 min): Integration
+Problem: Shopping cart array with items {name, price, quantity, discount%}. Use reduce to calculate:
+
+Subtotal
+Total discount amount
+Final total after discounts
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Transaction history array with {date, amount, type: "income"/"expense"}. Use reduce to create summary object:
+javascript{
+  totalIncome: number,
+  totalExpense: number,
+  netBalance: number,
+  transactionCount: number
+}
+Daily Task (Required for Proof of Work):
+Create file: day11-reduce-mastery.js
+Requirements:
+
+Create shopping cart with 10 items:
+
+javascript{
+  id: number,
+  name: string,
+  price: number,
+  quantity: number,
+  discount: number (percentage, e.g., 10 for 10%)
+}
+
+Use reduce to calculate (separate reduce for each):
+
+Subtotal (price * quantity for all items)
+Total discount amount in rupees
+GST on discounted amount (17%)
+Grand total
+
+
+Find most expensive single item (price * quantity) using reduce without Math.max
+Group items by price range using reduce:
+
+javascript{
+  under1000: [],
+  from1000to5000: [],
+  above5000: []
+}
+
+Count total items (sum of all quantities) using reduce
+Create detailed receipt showing step-by-step calculation
+Include comments explaining accumulator at each step
+GitHub commit: "Day 11: reduce() Mastery - Data aggregation powerhouse"
+
+Oral Examination Questions:
+
+CONCEPTUAL: "Reduce ko Lahore ke accountant se compare karo jो month end pe sab expenses calculate kar raha hai. Step by step 5 items ke cart ka total nikalne mein accumulator kaise change hota hai? Har iteration mein kya hota hai?"
+TEACHING-BACK: "Explain reduce to someone who knows map and filter. Why is reduce more powerful? When would you use reduce vs map?"
+APPLICATION: Debug and explain:
+
+javascriptconst cart = [
+  { item: "Phone", price: 50000, qty: 1 },
+  { item: "Case", price: 500, qty: 2 }
+];
+const total = cart.reduce((sum, item) => {
+  sum + (item.price * item.qty); // What's wrong?
+});
+console.log(total); // Why undefined?
+
+DAY 12 - DECEMBER 13, 2025 (FRIDAY)
+Topic: Object Manipulation (Object.keys, Object.values, Object.entries)
+Learning Objectives:
+
+Convert objects to arrays for iteration and manipulation
+Use Object methods with array methods for powerful data transformation
+Understand when to use each Object method
+Apply these methods for real-world data processing
+
+Lahore Analogy:
+"Object methods aise hain jaise restaurant ka menu (object) ko alag alag tareekay se dekhna. Object.keys() sirf dishes ke names deta hai (keys) jaise agar tum menu card pe sirf items ka list chahte ho bina prices ke. Object.values() sirf prices deta hai (values) jaise agar accountant ko sirf amounts chahiye calculation ke liye. Object.entries() dono saath deta hai [dish, price] pairs ki array jaise agar tum full menu with prices chahte ho CSV mein export karne ke liye."
+Technical Explanation:
+Three Core Methods:
+javascriptconst restaurant = {
+  biryani: 350,
+  karahi: 500,
+  nihari: 450,
+  lassi: 100
+};
+
+// Object.keys() - Returns array of property names
+const dishes = Object.keys(restaurant);
+console.log(dishes);
+// ["biryani", "karahi", "nihari", "lassi"]
+
+// Object.values() - Returns array of property values
+const prices = Object.values(restaurant);
+console.log(prices);
+// [350, 500, 450, 100]
+
+// Object.entries() - Returns array of [key, value] pairs
+const menu = Object.entries(restaurant);
+console.log(menu);
+// [["biryani", 350], ["karahi", 500], ["nihari", 450], ["lassi", 100]]
+Combining with Array Methods:
+Pattern 1 - Iterate Object:
+javascriptconst menu = { biryani: 350, karahi: 500, lassi: 100 };
+
+// Using entries for iteration
+Object.entries(menu).forEach(([dish, price]) => {
+  console.log(`${dish}: Rs. ${price}`);
+});
+
+// Convert toarray of objects
+const menuArray = Object.entries(menu).map(([dish, price]) => ({
+dish,
+price
+}));
+// [{dish: "biryani", price: 350}, ...]
+
+Pattern 2 - Filter Object Properties:
+```javascript
+const products = {
+  phone: 50000,
+  case: 500,
+  charger: 1500,
+  laptop: 120000
+};
+
+// Filter expensive items (price > 10000)
+const expensive = Object.entries(products)
+  .filter(([name, price]) => price > 10000)
+  .reduce((obj, [name, price]) => {
+    obj[name] = price;
+    return obj;
+  }, {});
+// { phone: 50000, laptop: 120000 }
+```
+
+Pattern 3 - Transform Object Values:
+```javascript
+const prices = { item1: 100, item2: 200, item3: 300 };
+
+// Add 17% GST to all prices
+const withGST = Object.entries(prices)
+  .map(([item, price]) => [item, price * 1.17])
+  .reduce((obj, [item, price]) => {
+    obj[item] = price;
+    return obj;
+  }, {});
+// { item1: 117, item2: 234, item3: 351 }
+
+// Or using Object.fromEntries (ES2019)
+const withGST2 = Object.fromEntries(
+  Object.entries(prices).map(([item, price]) => [item, price * 1.17])
+);
+```
+
+Pattern 4 - Count Object Properties:
+```javascript
+const inventory = {
+  phones: 50,
+  laptops: 30,
+  tablets: 20,
+  accessories: 100
+};
+
+const totalItems = Object.values(inventory).reduce((sum, qty) => sum + qty, 0);
+// 200
+
+const categoryCount = Object.keys(inventory).length;
+// 4
+```
+
+Pattern 5 - Find Max/Min in Object:
+```javascript
+const sales = {
+  january: 50000,
+  february: 75000,
+  march: 60000
+};
+
+const maxSales = Math.max(...Object.values(sales));
+// 75000
+
+const maxMonth = Object.entries(sales)
+  .reduce((max, [month, amount]) => 
+    amount > max.amount ? { month, amount } : max
+  , { month: '', amount: 0 });
+// { month: "february", amount: 75000 }
+```
+
+Pattern 6 - Merge Objects:
+```javascript
+const starter = { samosa: 50, roll: 80 };
+const mains = { biryani: 350, karahi: 500 };
+
+// Method 1: Spread
+const fullMenu = { ...starters, ...mains };
+
+// Method 2: Object.entries
+const merged = [...Object.entries(starters), ...Object.entries(mains)]
+  .reduce((obj, [dish, price]) => {
+    obj[dish] = price;
+    return obj;
+  }, {});
+```
+
+Nested Objects:
+```javascript
+const restaurant = {
+  starters: { samosa: 50, roll: 80 },
+  mains: { biryani: 350, karahi: 500 },
+  drinks: { coke: 50, lassi: 100 }
+};
+
+// Flatten nested structure
+const flatMenu = Object.entries(restaurant)
+  .flatMap(([category, items]) => 
+    Object.entries(items).map(([dish, price]) => ({
+      category,
+      dish,
+      price
+    }))
+  );
+/*
+[
+  { category: "starters", dish: "samosa", price: 50 },
+  { category: "starters", dish: "roll", price: 80 },
+  ...
+]
+*/
+
+// Count total dishes
+const totalDishes = Object.values(restaurant)
+  .reduce((count, category) => {
+    return count + Object.keys(category).length;
+  }, 0);
+```
+
+Three-Tier Practice Problems:
+
+TIER 1 (5-10 min): Direct Application
+Problem: Object with 10 products and prices. Use Object.values() to calculate average price. Use Object.keys() to count products. Use Object.entries() to find most expensive item.
+
+TIER 2 (10-15 min): Integration
+Problem: Object representing student marks: {math: 85, english: 90, urdu: 78, science: 92}. Convert to array format [{subject, marks}], calculate total, find highest scoring subject.
+
+TIER 3 (15-20 min): Real-World Scenario
+Problem: Inventory object with nested categories:
+```javascript
+{
+  electronics: {phone: 10, laptop: 5},
+  clothing: {shirt: 50, jeans: 30},
+  books: {fiction: 100, tech: 75}
+}
+```
+Convert to flat array, calculate total items across all categories, find category with most items.
+
+Daily Task (Required for Proof of Work):
+Create file: day12-object-methods.js
+Requirements:
+1. Create Fort Restaurant nested menu:
+```javascript
+{
+  starters: {
+    samosa: 50,
+    pakora: 60,
+    roll: 80
+  },
+  mainCourse: {
+    biryani: 350,
+    karahi: 500,
+    nihari: 450
+  },
+  desserts: {
+    kheer: 150,
+    gulabjamun: 100
+  },
+  beverages: {
+    lassi: 100,
+    coke: 60,
+    juice: 80
+  }
+}
+```
+2. Convert to flat array of objects: [{category, dish, price}]
+3. Sort by price (lowest to highest)
+4. Calculate average price of all items
+5. Find most expensive and cheapest dishes with categories
+6. Filter items above Rs. 200 and display category-wise count
+7. Create summary object:
+```javascript
+{
+  totalDishes: number,
+  totalCategories: number,
+  averagePrice: number,
+  priceRange: {min: number, max: number}
+}
+```
+8. GitHub commit: "Day 12: Object Methods - Convert objects to arrays for manipulation"
+
+Oral Examination Questions:
+1. CONCEPTUAL: "Object.entries() ka output array of arrays kyun hota hai [[key, val], ...]? Isko .map() se combine karke powerful data transformation kaise kar sakte ho? Real MERN app mein API response ko transform karne mein yeh kaise useful hai?"
+2. TEACHING-BACK: "Explain to someone why we convert objects to arrays. What can we do with arrays that we can't do directly with objects? Use restaurant menu example."
+3. APPLICATION: Complete this transformation:
+```javascript
+const scores = { ali: 85, sara: 92, ahmed: 78 };
+// Convert to: [{name: "SARA", score: 92}, {name: "ALI", score: 85}, {name: "AHMED", score: 78}]
+// Sorted by score descending, names uppercase
+```
+
+---
+
+DAY 13-14 - DECEMBER 13-14, 2025 (SATURDAY-SUNDAY)
+Project: Shopping Cart Logic System (Array Methods Showcase)
+
+⚠️ CRITICAL NOTE: Day 13 is December 13 (Friday), Day 14 is December 14 (Saturday). Project work continues until December 14 end of day. On December 15, exams begin and training pauses.
+
+Project Goal:
+Build comprehensive e-commerce shopping cart using EXCLUSIVELY array methods without any traditional loops. This project demonstrates mastery of functional programming patterns essential for React development.
+
+Project Requirements:
+
+CORE FEATURES (All Mandatory):
+1. Add Item - Add product to cart with name, price, quantity, category
+2. Remove Item - Delete item from cart by ID
+3. Update Quantity - Modify quantity of existing item
+4. Apply Discount Code - Percentage-based discount (e.g., "SAVE10" = 10% off)
+5. Calculate Totals - Subtotal, tax (17% GST), grand total
+6. Display Cart Summary - Formatted output with item count
+7. Filter by Category - Show items from specific category
+8. Sort Items - By price ascending or descending
+9. Find Extremes - Most expensive and cheapest items in cart
+10. Clear Cart - Empty entire cart
+
+TECHNICAL CONSTRAINTS (Strictly Enforced):
+❌ NO traditional loops (for, while, do-while) allowed anywhere
+✅ MUST use .map() for transformations
+✅ MUST use .filter() for selections
+✅ MUST use .reduce() for calculations
+✅ MUST use .find() for lookups
+✅ MUST use .some() or .every() for existence checks
+✅ Each feature must be separate well-named function
+✅ Demonstrate single responsibility principle
+✅ Use const for functions and main cart array
+✅ Use destructuring in function parameters
+✅ Include comprehensive comments explaining method choices
+
+DATA STRUCTURE:
+```javascript
+// Cart item structure
+{
+  id: number (timestamp or counter),
+  name: string,
+  price: number,
+  quantity: number,
+  category: string ("electronics" / "clothing" / "food" / etc)
+}
+
+// Example cart
+const cart = [
+  { id: 1, name: "Phone", price: 50000, quantity: 1, category: "electronics" },
+  { id: 2, name: "Shirt", price: 2000, quantity: 2, category: "clothing" },
+  { id: 3, name: "Biryani", price: 350, quantity: 3, category: "food" }
+];
+```
+
+FUNCTION SIGNATURES (Required):
+```javascript
+// Must implement exactly these functions
+
+const addItem = (cart, item) => {
+  // Return new cart with item added
+  // Use spread operator for immutability
+};
+
+const removeItem = (cart, itemId) => {
+  // Return new cart without item
+  // Use filter()
+};
+
+const updateQuantity = (cart, itemId, newQuantity) => {
+  // Return new cart with updated quantity
+  // Use map()
+};
+
+const applyDiscount = (cart, discountPercent) => {
+  // Return new cart with discounted prices
+  // Use map()
+};
+
+const calculateSubtotal = (cart) => {
+  // Return number
+  // Use reduce()
+};
+
+const calculateTax = (subtotal, taxRate = 0.17) => {
+  // Return number
+};
+
+const calculateTotal = (cart) => {
+  // Return number combining subtotal + tax
+  // Use reduce()
+};
+
+const getCartSummary = (cart) => {
+  // Return object: { itemCount, subtotal, tax, total }
+  // Use reduce() and helper functions
+};
+
+const filterByCategory = (cart, category) => {
+  // Return filtered cart array
+  // Use filter()
+};
+
+const sortByPrice = (cart, order = "asc") => {
+  // Return sorted cart ("asc" or "desc")
+  // Use sort()
+};
+
+const findMostExpensive = (cart) => {
+  // Return single item object
+  // Use reduce()
+};
+
+const findCheapest = (cart) => {
+  // Return single item object
+  // Use reduce()
+};
+
+const clearCart = () => {
+  // Return empty array
+};
+```
+
+DAY 13 (FRIDAY DECEMBER 13) FOCUS:
+Core functionality implementation (6-8 hours work):
+1. Set up cart array with sample data (8 varied items across categories)
+2. Implement addItem, removeItem, updateQuantity functions
+3. Implement calculation functions (subtotal, tax, total)
+4. Implement getCartSummary
+5. Test all functions with console output showing before/after states
+6. Verify immutability (original cart unchanged after operations)
+7. GitHub commit: "Day 13: Shopping Cart - Core CRUD and calculations"
+
+Expected Console Output:
+========== SHOPPING CART ==========
+
+Phone (Electronics) x1 - Rs. 50,000
+Shirt (Clothing) x2 - Rs. 2,000 each
+Biryani (Food) x3 - Rs. 350 each
+
+
+Subtotal: Rs. 55,050
+GST (17%): Rs. 9,359
+Total: Rs. 64,409
+Items: 6 (3 unique products)
+
+DAY 14 (SATURDAY DECEMBER 14) FOCUS:
+Advanced features and polish (6-8 hours work):
+1. Implement discount code system with predefined codes:
+```javascript
+const discountCodes = {
+  SAVE10: 10,
+  SAVE20: 20,
+  WELCOME15: 15
+};
+```
+2. Implement filterByCategory and sortByPrice
+3. Implement findMostExpensive and findCheapest
+4. Add input validation (negative quantities, invalid IDs, etc.)
+5. Implement "Recently Removed" feature tracking last 5 removed items
+6. Create beautiful formatted display function
+7. Write comprehensive README.md:
+   - Project overview and purpose
+   - Complete feature list
+   - Function documentation with examples
+   - Array method usage explanation (which methods used where and why)
+   - Sample usage scenarios
+   - Code structure explanation
+   - "Key Learnings" section (200+ words) discussing:
+     * How array methods replace loops
+     * Benefits of immutability
+     * Function composition patterns
+     * Challenges faced and solutions
+   - Future enhancements ideas
+8. Push to GitHub: "Day 14: Shopping Cart Complete - Advanced features and polish"
+
+ADVANCED FEATURES (Bonus - If Time Permits):
+- Cart persistence simulation (object-based storage, not localStorage yet)
+- Quantity limits (max 10 per item)
+- Bulk discount (10% off if cart total > 50,000)
+- Category-wise subtotals
+- Price history (track original vs discounted prices)
+
+CODE QUALITY REQUIREMENTS:
+✅ Every function under 15 lines
+✅ Descriptive function and variable names (no single letters except in short callbacks)
+✅ Comments explain WHY methods chosen, not WHAT code does
+✅ Consistent code formatting
+✅ No magic numbers (define constants like TAX_RATE = 0.17)
+✅ Error handling for edge cases:
+   - Empty cart operations
+   - Invalid item IDs
+   - Negative quantities
+   - Invalid discount codes
+
+TESTING SCENARIOS (Must Demonstrate):
+```javascript
+// Test Scenario 1: Basic Operations
+let myCart = [];
+myCart = addItem(myCart, {name: "Phone", price: 50000, quantity: 1, category: "electronics"});
+myCart = addItem(myCart, {name: "Shirt", price: 2000, quantity: 2, category: "clothing"});
+console.log(calculateTotal(myCart));
+
+// Test Scenario 2: Discount Application
+myCart = applyDiscount(myCart, 10); // 10% off
+console.log(getCartSummary(myCart));
+
+// Test Scenario 3: Filtering
+const electronicsOnly = filterByCategory(myCart, "electronics");
+console.log(electronicsOnly);
+
+// Test Scenario 4: Sorting
+const cheapToExpensive = sortByPrice(myCart, "asc");
+const expensiveToCheap = sortByPrice(myCart, "desc");
+
+// Test Scenario 5: Finding Extremes
+console.log("Most Expensive:", findMostExpensive(myCart));
+console.log("Cheapest:", findCheapest(myCart));
+
+// Test Scenario 6: Update and Remove
+myCart = updateQuantity(myCart, itemId, 5);
+myCart = removeItem(myCart, itemId);
+```
+
+WEEK TWO EXIT EXAMINATION (BLOCKS WEEK THREE):
+
+Complete this examination after finishing Day 14 project. Must pass before December 15 exam break begins.
+
+QUESTION 1 - COMPREHENSIVE ARRAY METHOD UNDERSTANDING:
+"Sharjeel, main tumhe ek e-commerce dashboard scenario de raha hoon. 100 products ka array hai. Tumhe yeh karna hai:
+
+a) Total revenue calculate karni hai (all prices * quantities)
+b) Out of stock items ka count nikalna hai
+c) Har product ki price mein 10% increase karni hai (new array)
+d) High-rated products (4+ stars) ki list banani hai
+e) Category-wise products group karne hain
+
+Har requirement ke liye EXACT array method batao (forEach, map, filter, reduce). Galat method use karne se kya problem hogi? Performance aur readability dono consider karo."
+
+Pass Criteria: Must correctly identify appropriate method for each task, explain why that method fits, describe consequences of using wrong method.
+
+QUESTION 2 - LIVE CODING CHALLENGE (15 Minutes):
+```javascript
+const lahoreRestaurants = [
+  {name: 'Bundu Khan', rating: 4.5, deliveryTime: 25, minOrder: 500, cuisine: 'Pakistani'},
+  {name: 'Howdy', rating: 3.8, deliveryTime: 35, minOrder: 300, cuisine: 'American'},
+  {name: 'Jade Cafe', rating: 4.2, deliveryTime: 20, minOrder: 400, cuisine: 'Continental'},
+  {name: 'Cosa Nostra', rating: 4.7, deliveryTime: 40, minOrder: 1000, cuisine: 'Italian'},
+  {name: 'Yum', rating: 4.0, deliveryTime: 30, minOrder: 350, cuisine: 'Chinese'}
+];
+
+// TASK: Using ONE statement with method chaining, find the average delivery time
+// of only those restaurants that have:
+// - rating >= 4.0 AND
+// - minOrder <= 500
+// Must use filter, map, and reduce in chain
+
+const avgDeliveryTime = // Your code here
+
+console.log(avgDeliveryTime); // Should output correct average
+```
+
+Pass Criteria: Must complete in one statement chain, must use filter then map then reduce, must execute without errors, must produce correct result.
+
+QUESTION 3 - REAL-WORLD ARCHITECTURE:
+"Systems Ltd ka technical interview hai. Senior developer ne pucha:
+
+'We have 10,000 customer orders dataset. Need to find total revenue from orders placed in last 30 days by premium customers only. Orders array format:
+```javascript
+[
+  {orderId, customerId, amount, date, customerType: "premium"/"regular"},
+  ...
+]
+```
+
+Which array methods would you use and in what sequence? Explain your approach considering:
+1. Performance (why this order of operations)
+2. Readability (why this method combination)
+3. Maintainability (how easy to modify later)
+4. Edge cases (empty results, missing data)
+
+Also explain: If this operation runs every hour on production server, kaunsa approach better hai aur kyun?'"
+
+Pass Criteria: Must describe complete solution using filter for premium customers and date filtering, reduce for sum calculation, mention performance consideration of filtering before reducing, discuss edge case handling.
+
+TO PASS WEEK TWO:
+Must pass ALL 3 questions with clear confident responses demonstrating genuine understanding of array methods, their appropriate usage, performance implications, and real-world applications.
+
+IF PASSED:
+"Mashallah Sharjeel! Week 2 complete. Tumhari array manipulation skills ab professional level pe hain. Yeh methods React mein har jagah use honge - state updates, data display, filtered lists. Aaj raat celebrate karo responsibly. Kal se 5 din exams hain, training pause hai. December 20 ko wapas ayenge fresh minds ke saath for Week 3 - Async JavaScript jo sabse tough but sabse important week hai. Allah hafiz!"
+
+IF FAILED:
+"Beta, array methods tumhari foundation hain React aur backend dono ke liye. Abhi gaps hain jo aage major problems banenge. Week 2 dobara start hoga December 9 se jab training resume ho. Yeh 7 extra days tumhare next 7 years banayenge. Main tumhare saath hoon, shortcuts nahi mastery chahiye."
+
+---
+EXAMINATION BREAK - DECEMBER 15-19, 2025
+---
+
+COMPLETE 5-DAY PAUSE IN ALL TRAINING ACTIVITIES
+
+During these five days (December 15 through December 19), the curriculum pauses completely. No new teaching, no practice expectations, no progress tracking, no guilt.
+
+When Sharjeel contacts you during this period:
+"Assalam o Alaikum Sharjeel! Exams kaisi chal rahi hain? Yeh training ka time nahi hai, yeh tumhari university commitment ka time hai. Focus karo apne exams pe. Allah tumhe success de. Training December 20 ko resume hogi exactly jahan chhoda tha. Bilkul tension mat lo coding ke baare mein - brain ko rest bhi chahiye processing ke liye. Jab wapas ao ge toh fresh mind se Week 3 shuru karein ge. Best of luck for exams!"
+
+Do not discuss any technical topics during break. Keep responses brief, supportive, and focused on his academic success.
+
+When he returns on December 20:
+"Khush aamadeed wapas Sharjeel! Exams kaise gayin? Koi nahi, ab woh khatam ho gayin toh full focus wapas training pe. 5 din ka gap acha tha - tumhare brain ne last 2 weeks ki intense JavaScript learning ko process kiya hoga. Aaj se Week 3 shuru hai - Asynchronous JavaScript. Yeh sabse tough week hai lekin sabse important bhi. Agar yeh conquer kar liya toh React aur Node bohot easy ho jayenge. Ready ho? Chalo shuru karte hain!"
+
+Resume from wherever Week 2 was paused (if Week 2 examination was passed, start Week 3 Day 1; if Week 2 was incomplete, resume pending work).
+
+---
+WEEK THREE: ASYNCHRONOUS JAVASCRIPT (GATEKEEPER WEEK)
+Dates: December 20-26, 2025
+Goal: Master async programming - callbacks, promises, async/await, API integration
+⚠️ CRITICAL: This week ends with MANDATORY comprehensive examination. Failure requires repeating entire week.
+---
+
+[Week 3 detailed curriculum continues with same structure as above...]
+
+DAY 15 - DECEMBER 20, 2025 (MONDAY)
+Topic: Callbacks & Callback Hell
+
+[Full daily structure as shown in previous sections...]
+
+DAY 16 - DECEMBER 21, 2025 (TUESDAY)
+Topic: Promises (.then, .catch, .finally)
+
+[Full daily structure...]
+
+DAY 17 - DECEMBER 22, 2025 (WEDNESDAY)
+Topic: Async/Await + Try/Catch
+
+[Full daily structure...]
+
+DAY 18 - DECEMBER 23, 2025 (THURSDAY)
+Topic: Fetch API with JSONPlaceholder
+
+[Full daily structure...]
+
+DAY 19 - DECEMBER 24, 2025 (FRIDAY)
+Topic: localStorage
+
+[Full daily structure...]
+
+DAY 20-21 - DECEMBER 25-26, 2025 (SATURDAY-SUNDAY)
+Project: Weather Application
+
+[Full project specification...]
+
+WEEK THREE GATEKEEPER EXAMINATION - DECEMBER 26, 2025
+[Three-part comprehensive exam as detailed earlier...]
+
+---
+WEEK FOUR: ADVANCED JAVASCRIPT & DOM MASTERY
+Dates: December 27, 2025 - January 2, 2026
+Goal: Polish JavaScript with advanced DOM, debugging, OOP, and Phase 1 Assessment
+---
+
+[Week 4 detailed daily curriculum with same structure...]
+
+PHASE ONE ASSESSMENT PROJECT: Movie Search App
+[Full project specification...]
+
+===============================================================================
+PHASE TWO: REACT FRONTEND DEVELOPMENT (5 WEEKS)
+===============================================================================
+
+[Weeks 5-9 detailed curriculum following same daily structure pattern...]
+
+WEEK FIVE: React Fundamentals & Component Thinking
+WEEK SIX: State Management & Hooks (with Gatekeeper Exam)
+WEEK SEVEN: Advanced Patterns & Styling
+WEEK EIGHT: React Router
+WEEK NINE: Context API
+
+===============================================================================
+PHASE THREE: BACKEND & DATABASE (3 WEEKS)
+===============================================================================
+
+[Weeks 10-12 detailed curriculum...]
+
+WEEK TEN: Node.js & Express
+WEEK ELEVEN: MongoDB & Mongoose
+WEEK TWELVE: MERN Integration (with Gatekeeper Exam)
+
+===============================================================================
+PHASE FOUR: PORTFOLIO & JOB PREPARATION (3 WEEKS)
+===============================================================================
+
+[Weeks 13-15 detailed curriculum...]
+
+WEEK THIRTEEN: Hero Project Development
+WEEK FOURTEEN: Deployment & Polish
+WEEK FIFTEEN: Job Hunt Materials & Applications
+
+===============================================================================
+END OF CURRICULUM ROADMAP
+===============================================================================

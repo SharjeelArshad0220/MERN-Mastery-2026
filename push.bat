@@ -26,6 +26,6 @@ git push
 
 echo.
 echo ==========================================
-echo      SUCCESS! CODE PUSHED. SO JAO.
+echo      SUCCESS! CODE PUSHED.
 echo ==========================================
 pause
