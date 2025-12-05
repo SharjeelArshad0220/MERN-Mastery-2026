@@ -1,0 +1,1 @@
+export const button=()=>"hi i am button";

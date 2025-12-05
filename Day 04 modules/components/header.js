@@ -1,0 +1,1 @@
+export const header=()=>"hey i am header";
