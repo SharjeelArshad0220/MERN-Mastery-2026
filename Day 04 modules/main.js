@@ -7,6 +7,6 @@ import { button,header } from "./components/index.js";
 console.log(button(),header());
 // quiz stroke 
 import { value, increment } from './helper.js';
-console.log(value); // Output: 1
-increment();        // Humne wahan ja kar value barha di
-console.log(value); // AB KYA HOGA?
+console.log(value); 
+increment();        
+console.log(value); 
