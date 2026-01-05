@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Task Manager</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <div id="slider">
+<div class="page">
+     <h1 id="head">My Todo App</h1>
+    <div class="input-group">
+      <input type="text" id="title-input" placeholder="Task Title...">
+      <input type="date" id="date-input" for="date-input">
+
+      <select id="priority-input">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <button id="add-btn">Submit</button>
+    </div>
+    <button id="viewTasks" class="mover">View Tasks</button>
+</div>
+<div class="page">
+    <div class="lists-container">
+
+      <div class="column high">
+        <h3>🔥 High Priority</h3>
+        <div id="high-list"></div>
+      </div>
+
+      <div class="column medium">
+        <h3>⚠️ Medium Priority</h3>
+        <div id="med-list"></div>
+      </div>
+
+      <div class="column low">
+        <h3>☕ Low Priority</h3>
+        <div id="low-list"></div>
+      </div>
+    </div>
+    <button id="addTask" class="mover">Add Task</button>
+    </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
