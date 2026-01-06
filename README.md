@@ -1,4 +1,4 @@
-```markdown
+
 # 🚀 MERN Stack Mastery 2026
 
 **Author:** Sharjeel Arshad  
@@ -330,4 +330,3 @@ mern-journey-sharjeel/
 ---
 
 *Built with ❤️ and discipline in Lahore, Pakistan*
-```
