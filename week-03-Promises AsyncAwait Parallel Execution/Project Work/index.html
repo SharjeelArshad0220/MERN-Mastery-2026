@@ -3,40 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lahore Weather Dashboard</title>
+    <title>WeatherPro Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="weather-card">
-        <div class="search-section">
-            <input type="text" id="city-input" placeholder="Enter city name (e.g. Lahore)">
-            <input type="submit" id="search-btn" value="Search">
+    <header class="main-header">
+        <div class="logo">
+            <i class="fa-solid fa-cloud-sun"></i> WeatherPro
         </div>
+        <nav class="social-links">
+            <a href="https://github.com/SharjeelArshad0220" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/sharjeel-arshad-dev/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </nav>
+    </header>
 
-        <p id="error-message" class="error hidden"></p>
-
-        <div class="weather-info" id="weather-info">
-            <h2 id="city-name">Lahore, PK</h2>
-            <div class="temp-container">
-                <img id="weather-icon" src="" alt="Weather Icon">
-                <h1 id="temp">25°C</h1>
+    <main class="container">
+        
+        <div class="weather-card">
+            <div class="search-section">
+                <input type="text" id="city-input" placeholder="Enter city name (e.g. Lahore)">
+                <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
-            <p id="description">Haze</p>
-            
-            <div class="details">
-                <div class="col">
-                    <p>Humidity</p>
-                    <p id="humidity">50%</p>
+    
+            <p id="error-message" class="error hidden"></p>
+    
+            <div class="weather-info" id="weather-info">
+                <h2 id="city-name">Lahore, PK</h2>
+                <p id="date-time"></p>
+                <div class="temp-container">
+                    <img id="weather-icon" src="" alt="Weather Icon">
+                    <h1 id="temp">25°C</h1>
                 </div>
-                <div class="col" id="speed">
-                    <p>Wind Speed</p>
-                    <p id="wind-speed">10 km/h</p>
+                <p id="description">Haze</p>
+                
+                <div class="details">
+                    <div class="col">
+                        <p>Humidity</p>
+                        <p id="humidity">50%</p>
+                    </div>
+                    <div class="col" id="speed">
+                        <p>Wind Speed</p>
+                        <p id="wind-speed">10 km/h</p>
+                    </div>
                 </div>
             </div>
+            <div class="loader hidden"></div>
         </div>
-    </div>
+        </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 WeatherPro. Built with ❤️ by <strong>Sharjeel</strong>.</p>
+    </footer>
 
     <script type="module" src="app.js"></script>
 </body>
-</html>
+ </html>
