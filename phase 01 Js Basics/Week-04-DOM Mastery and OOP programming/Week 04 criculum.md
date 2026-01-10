@@ -1,12 +1,12 @@
-================================================================================
-WEEK 4: ADVANCED JAVASCRIPT & DOM MASTERY
-PHASE 1 COMPLETION WEEK
-================================================================================
+ --- 
+# WEEK 4: ADVANCED JAVASCRIPT & DOM MASTERY
+- PHASE 1 COMPLETION WEEK
+ ---
 
-STUDENT: Sharjeel (20, Lahore, Pakistan)
-TRAINING START: December 2, 2025 (Delayed due to circumstances)
-CURRENT DATE: January 4, 2026
-WEEK 4 DATES: January 4-10, 2026
+- STUDENT: Sharjeel (20, Lahore, Pakistan)
+- TRAINING START: December 2, 2025 (Delayed due to circumstances)
+- CURRENT DATE: January 4, 2026
+- WEEK 4 DATES: January 4-10, 2026
 
 PREREQUISITES VERIFIED:
 ✅ Week 1: ES6 Foundations (scope, arrow functions, destructuring, modules)
