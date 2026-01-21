@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Validation</title>
+</head>
+
+<body>
+    <button id="theme-toggle">Toggle Mode</button>
+    <main>
+        <!-- entities of our form  -->
+        <form action="#" id="validForm" method="post" novalidate>
+            <div class="field name">
+                <label for="name">Full Name *</label>
+                <input 
+                type="text"
+                id="name"
+                name="name"
+                required
+                pattern="^[A-Za-z\s]{3,}$"
+                minlength="3"
+                placeholder="e.g., Sharjeel Arshad"
+                aria-describedby="name-hint name-error"
+                aria-live="polite"
+                >
+                <small id="name-hint" class="hint">please use only letters and spaces</small>
+                <small id="name-error" class="error"></small>
+            </div>
+            <div class="field email">
+                <label for="email">Enter Email *</label>
+                <input 
+                type="email"
+                required
+                id="email"
+                name="email"
+                placeholder="Username@gmail.com"
+                aria-describedby="email-hint email-error"
+                aria-live="polite"
+                >
+                <small id="email-hint" class="hint">Enter a valid email Address</small>
+                <small id="email-error" class="error"></small>
+            </div>
+            <div class="field password">
+                <label for="password">Enter Password *</label>
+                <input 
+                type="password"
+                id="password"
+                name="password"
+                required
+                autocomplete="new-password"
+                minlength="8"
+                aria-describedby="password-hint password-error"
+                aria-live="polite"
+                placeholder="e.g.,XXXXXXX"
+                ><span id="meter" disabled class="counter"></span>
+                <small id="password-hint" class="hint">Enter at least 8 characters strong password.</small>
+                <small id="password-error" class="error"></small>
+            </div>
+            <div class="field confirm">
+                <label for="Confirm">Confirm Password *</label>
+                <input 
+                type="password"
+                name="Confirm"
+                id="Confirm"
+                required
+                autocomplete="current-password"
+                placeholder="Re-enter the password"
+                minlength="8"
+                aria-describedby="Confirm-hint Confirm-error"
+                aria-live="polite"
+                >
+                <small id="Confirm-hint" class="hint">Must match the password enterd above.</small>
+                <small id="Confirm-error" class="error"></small>
+            </div>
+            <div class="field phone">
+                <label for="phone">Phone no. *</label>
+                <input 
+                id="phone"
+                name="phone"
+                inputmode="numeric"
+                required
+                type="tel"
+                aria-describedby="phone-hint phone-error"
+                aria-live="polite"
+                placeholder="e.g., 03001234567"
+                >
+                <small id="phone-hint" class="hint">Write a valid pakistan number starting with "03".</small>
+                <small id="phone-error" class="error"></small>
+            </div>
+            <div class="field portfolio">
+                <label for="Portfolio">Portfolio URL *</label>
+                <input 
+                id="Portfolio"
+                name="Portfolio"
+                required
+                type="url"
+                placeholder="http:// or https://....."
+                aria-describedby="Portfolio-hint Portfolio-error"
+                aria-live="polite"
+                >
+                <small id="Portfolio-hint" class="hint">Paste your portfolio link with http:// or https://</small>
+                <small id="Portfolio-error" class="error"></small>
+            </div>
+            <div class="field dob">
+                <label for="DOB">Date of Birth *</label>
+                <input 
+                id="DOB"
+                name="DOB"
+                required
+                min="1900-01-01"
+                max="2009-12-31"
+                type="date"
+                aria-describedby="DOB-hint DOB-error"
+                aria-live="polite"
+                >
+                <small id="DOB-hint" class="hint">Only people born before 2010 are allowed</small>
+                <small id="DOB-error" class="error"></small>
+            </div>
+            <div class="field zipcode">
+                <label for="zipCode">Zip Code</label>
+                <input 
+                type="text"
+                id="zipCode"
+                pattern="\d{5}"
+                placeholder="e.g., 12345"
+                name="zipCode"
+                aria-describedby="zipCode-hint zipCode-error"
+                aria-live="polite"
+                maxlength="5"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                >
+                <small id="zipCode-hint" class="hint">5 digit zip code of your homeland</small>
+                <small id="zipCode-error" class="error"></small>
+            </div>
+            <div class="field bio">
+                <label for="Bio">Write your Bio</label>
+                <textarea
+                id="Bio"
+                name="Bio"
+                placeholder="Bio......"
+                name="Bio"
+                aria-describedby="Bio-hint Bio-error"
+                aria-live="polite"
+                maxlength="200"
+                ></textarea>
+                <small id="Bio-hint" class="hint">Write something about Yourself (max 200 characters).</small>
+                <small id="Bio-error" class="error"></small>
+            </div>
+            <div class="field terms">
+                <label for="terms">
+                <input 
+                type="checkbox"
+                checked
+                id="terms"
+                name="terms"
+                required
+                aria-describedby="terms-hint terms-error"
+                aria-live="polite"
+                >I agree with terms and conditions.
+                </label>
+                <small id="terms-hint" class="hint">you must agree to continue.</small>
+                <small id="terms-error" class="error"></small>
+            </div>
+            <div class="field submit"><input type="submit" disabled id="submit" value="Submit Data"></div>
+        </form>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>

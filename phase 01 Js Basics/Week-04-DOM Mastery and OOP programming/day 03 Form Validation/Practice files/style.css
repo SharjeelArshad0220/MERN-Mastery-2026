@@ -1,0 +1,18 @@
+#counter {
+    background-color: rgb(230, 255, 230);
+    border-radius: 5px; /* Missing 'px' */
+    min-width: 18px;
+    min-height: 5px;
+    color: rgb(0, 70, 0);
+    display: inline-block; /* Important! */
+    text-align: center;
+    padding: 2px 5px;
+    margin-left: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+}
+input{
+    border: 2px transparent;
+    border-right:none ;
+    outline: none;
+}

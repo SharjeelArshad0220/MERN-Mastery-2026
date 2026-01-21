@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Fields (different but familiar)
+Full Name (required, 3–50, letters/spaces)
+Email (required, email type)
+Phone (PK) (required, allow 03XXXXXXXXX OR 03XX-XXXXXXX)
+Password (required, min 8)
+Confirm Password (required, must match)
+City (required dropdown)
+Terms (required checkbox) -->
+    <main>
+        <form id="memberForm" action="#" method="post" novalidate>
+            <h1>Membership Signup</h1>
+            <div class="field">
+                <label for="fullName">Full Name *</label>
+                <input id="fullName" name="fullName" type="text" required minlength="3" maxlength="50"
+                    pattern="[a-zA-Z '-]+" autocomplete="name"
+                    aria-describedby="fullName-hint fullName-error" placeholder="e.g., Ali Raza" />
+                <small id="fullName-hint" class="hint">3–50 letters, spaces allowed.</small>
+                <small id="fullName-error" class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+                <label for="email">Enter Email *</label>
+                <input id="email" name="email" type="email" required autocomplete="email"
+                    aria-describedby="email-hint email-error" placeholder="e.g.,username@domain.com" />
+                <small id="email-hint" class="hint">Please Enter a valid Email(e.g.,username@domain.com)</small>
+                <small id="email-error" class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+                <label for="phone">Enter Phone number*</label>
+                <input id="phone" name="phone"  type="tel" required inputmode="numeric" autocomplete="tel"
+                aria-describedby="phone-hint phone-error" placeholder="e.g.,03XX-XXXXXXX or 03XXXXXXXXX" />
+                <small id="phone-hint" class="hint">Please Enter a valid Phone number(e.g.,03XX-XXXXXXX)</small>
+                <small id="phone-error" class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+                <label for="password">Enter Password *</label>
+                <input id="password" name="password" type="password" required minlength="8" autocomplete="new-password"
+                    aria-describedby="password-hint password-error" placeholder="e.g.,XXXXXXXX" />
+                <small id="password-hint" class="hint">Please Enter a Strong Password</small>
+                <small id="password-error" class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" required minlength="8"
+                    autocomplete="new-password" aria-describedby="confirmPassword-hint confirmPassword-error"
+                    placeholder="e.g.,Re-enter Password" />
+                <small id="confirmPassword-hint" class="hint">Please Enter a matching password</small>
+                <small id="confirmPassword-error" class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+                <label for="city">Select Your city*</label>
+                <select name="city" id="city" required autocomplete="city" aria-describedby="city-hint city-error">
+                    <option value="">Select City</option>
+                    <option value="Lahore">Lahore Pakistan</option>
+                    <option value="Islamabad">Islamabad Pakistan</option>
+                    <option value="Karachi">Karachi Pakistan</option>
+                    <option value="London">London UK</option>
+                    <option value="New york">New york USA</option>
+                </select>
+                <small id="city-hint" class="hint">Please Select a city name to proceed</small>
+                <small id="city-error" class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+                <label class="checkbox" for="terms"><input id="terms" name="terms" type="checkbox" placeholder=" " required aria-describedby="terms-hint terms-error"/>I agree with terms * and conditions of team Alpha</label>
+                <small id="terms-hint" class="hint">Please agree Our terms & Conditions to create Account</small>
+                <small id="terms-error" class="error" aria-live="polite"></small>
+            </div>
+            <button id="submitBtn" type="submit" disabled>Create Account</button>
+            <div id="form-errors" role="alert" aria-live="polite"></div>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

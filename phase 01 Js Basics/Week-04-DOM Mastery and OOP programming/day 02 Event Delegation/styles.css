@@ -1,56 +1,151 @@
-/* .blue{
-    background-color: rgb(51, 111, 240);
-}
-.parent{
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: aquamarine;
-    margin: auto;
-}
-.grandparent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    width: 300px;
-    background-color: rebeccapurple;
-}
-#add-post{
-    border-radius: 5px;
-    background-color: blueviolet;
-    cursor:alias;
-    margin: 10px;
-
-}
-.yellow{
-    background-color: rgb(202, 248, 110);
-}
-.post{
-    margin: 15px;
-    padding: 10px;
-}
-.feed{
-    padding: 90px;
-} */
- .post {
-  border: 2px solid #ddd;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-}
-.selected{
-    background-color: rgb(253, 214, 162);
-}
-button {
-  margin: 5px;
-  padding: 8px 15px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
+/* ===== Theme (simple, easy to tweak) ===== */
+:root {
+    --bg: #f6f7fb;
+    --panel: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --primary: #2563eb;
+    --ok: #10b981;
+    --error: #ef4444;
+    --border: #d1d5db;
+    --radius: 8px;
+    --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-.like-btn { background: #4CAF50; color: white; }
-.order-btn { background: #2196F3; color: white; }
-.delete-btn { background: #f44336; color: white; }
+/* ===== Layout ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--bg);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+main {
+    width: 100%;
+    max-width: 460px;
+}
+
+/* ===== Form Panel ===== */
+#signupForm {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#signupForm h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+}
+
+/* ===== Fields ===== */
+.field {
+    display: grid;
+    gap: 6px;
+}
+
+label {
+    font-size: 14px;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.error {
+    color: var(--error);
+    font-size: 12px;
+    min-height: 16px;
+}
+
+/* ===== Inputs ===== */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    font-size: 14px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+::placeholder {
+    color: #9ca3af;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* HTML5 validity states */
+input:required:valid {
+    border-color: var(--ok);
+}
+
+input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--error);
+}
+
+/* ===== Checkbox layout ===== */
+label.checkbox {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 8px;
+    align-items: start;
+}
+
+label.checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== Submit button ===== */
+button[type="submit"] {
+    cursor: pointer;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    transition: filter .15s ease, transform .05s ease;
+}
+
+button[type="submit"]:hover {
+    filter: brightness(1.05);
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+/* ===== Screen-reader helper ===== */
+.sr-only {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

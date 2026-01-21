@@ -1,0 +1,248 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Account</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- We’ll add CSS and JS later; focus on clean HTML first -->
+</head>
+<body>
+  <main>
+    <form action="#" method="post" id="signupForm" novalidate>
+      <h1>Create Your Account</h1>
+      <p id="form-help" class="sr-only">
+        All fields marked * are required. Errors will appear below each field.
+      </p>
+       <!-- Full Name
+      <div class="field">
+        <label for="name">Full Name *</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          minlength="3"
+          autocomplete="name"
+          placeholder="e.g., Ahmed Raza"
+          aria-describedby="name-hint name-error"
+        />
+        <small id="name-hint" class="hint">Enter your real full name.</small>
+        <small id="name-error" class="error" aria-live="polite"></small>
+      </div> -->
+<div class="field">
+    <label for="name"> Enter Name*</label>
+    <input 
+    type="text" 
+    name="name" 
+    id="name"
+    placeholder="e.g. , Sharjeel Arshad"
+    minlength="3"
+    required
+    autocomplete="name"
+    pattern="^[A-Za-z][A-Za-z\s'.-]{2,49}$"
+    
+    aria-describedby="name-hint name-error"
+    >
+    <small id="name-hint" class="hint">Enter your real full name.</small>
+    <small id="name-error" class="error" aria-live="polite"></small>
+</div>
+      <!-- Email -->
+      <!-- <div class="field">
+        <label for="email">Email *</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          placeholder="e.g., ahmed@example.com"
+          aria-describedby="email-hint email-error"
+        />
+        <small id="email-hint" class="hint">Use a valid email address.</small>
+        <small id="email-error" class="error" aria-live="polite"></small>
+      </div> -->
+      <div class="field">
+        <label for="email">
+            Email *
+        </label>
+        <input 
+        type="email" 
+        name="email" 
+        id="email"
+        required
+        autocomplete="email"
+        placeholder="e.g., ahmed@example.com"
+        aria-describedby="email-hint email-error"
+        >
+        <small id="email-hint" class="hint">Use a valid email address.</small>
+        <small id="email-error" class="error" aria-live="polite"></small>
+      </div>
+
+      <!-- Password
+      <div class="field">
+        <label for="password">Password (min 8 characters) *</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          minlength="8"
+          autocomplete="new-password"
+          placeholder="Enter a strong password"
+          aria-describedby="password-hint password-error"
+        />
+        <small id="password-hint" class="hint">
+          At least 8 characters. Use letters, numbers, and symbols for strength.
+        </small>
+        <small id="password-error" class="error" aria-live="polite"></small>
+      </div> -->
+      <div class="field">
+        <label for="password">Password(min 8 characters) *</label>
+        <input 
+        type="password" 
+        name="password" 
+        id="password"
+        required
+        minlength="8"
+        placeholder="xxxxxxxx"
+      
+        aria-describedby="password-hint password-error"
+        autocomplete="new-password"
+        
+        >
+        <small id="password-hint" class="hint">At least 8 characters. Use letters, numbers, and symbols for strength.</small>
+        <small id="password-error" class="error" aria-live="polite"></small>
+      </div>
+
+      <!-- Confirm Password -->
+      <!-- <div class="field">
+        <label for="confirmPassword">Confirm Password *</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          required
+          minlength="8"
+          autocomplete="new-password"
+          placeholder="Re-enter your password"
+          aria-describedby="confirmPassword-hint confirmPassword-error"
+        />
+        <small id="confirmPassword-hint" class="hint">
+          Must match the password above.
+        </small>
+        <small id="confirmPassword-error" class="error" aria-live="polite"></small>
+      </div> -->
+      <div class="field">
+        <label for="confirmPassword">
+            Confirm Password *
+        </label>
+        <input 
+        type="password" 
+        name="confirmPassword" 
+        id="confirmPassword"
+        minlength="8"
+        required
+        placeholder="xxxxxxxx"
+        aria-describedby="confirmPassword-hint confirmPassword-error"
+        autocomplete="new-password"
+        >
+        <small id="confirmPassword-hint" class="hint">Must match the above password</small>
+        <small id="confirmPassword-error" class="error" aria-live="polite"></small>
+      </div>
+      <!-- Pakistani Phone -->
+      <!-- <div class="field">
+        <label for="phone">Phone (Pakistan: 03XXXXXXXXX) *</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          required
+          pattern="^03\d{9}$"
+          inputmode="numeric"
+          autocomplete="tel"
+          placeholder="e.g., 03001234567"
+          aria-describedby="phone-hint phone-error"
+        />
+        <small id="phone-hint" class="hint">
+          11 digits, starts with 03 (e.g., 03001234567).
+        </small>
+        <small id="phone-error" class="error" aria-live="polite"></small>
+      </div> -->
+      <div class="field">
+        <label for="phone">Phone (Pk:03xxxxxxxxx)*</label>
+        <input 
+        type="tel" 
+        name="phone" 
+        id="phone"
+        pattern="^03\d{9}$"
+        autocomplete="tel"
+        required
+        placeholder="03xxxxxxxxx"
+        aria-required="true"
+        aria-describedby="phone-hint phone-error"
+        >
+        <small id="phone-hint" class="hint">11 digits, starts with 03 (e.g., 03001234567).</small>
+        <small id="phone-error" class="error" aria-live="polite"></small>
+      </div>
+      <!-- CNIC (Optional) -->
+      <div class="field">
+        <label for="cnic">CNIC (optional)</label>
+        <input
+          id="cnic"
+          name="cnic"
+          type="text"
+          pattern="^\d{5}-\d{7}-\d$"
+          placeholder="e.g., 61101-1234567-1"
+          aria-describedby="cnic-hint cnic-error"
+          inputmode="numeric"
+        />
+        <small id="cnic-hint" class="hint">
+          Format: 5 digits - 7 digits - 1 digit (e.g., 61101-1234567-1).
+        </small>
+        <small id="cnic-error" class="error" aria-live="polite"></small>
+      </div>
+
+      <!-- Website (Optional) -->
+      <div class="field">
+        <label for="website">Website (optional)</label>
+        <input
+          id="website"
+          name="website"
+          type="url"
+          placeholder="https://example.com"
+          autocomplete="url"
+          aria-describedby="website-hint website-error"
+        />
+        <small id="website-hint" class="hint">
+          Include <code>https://</code> for valid URL format.
+        </small>
+        <small id="website-error" class="error" aria-live="polite"></small>
+      </div>
+
+      <!-- Terms -->
+      <div class="field">
+        <label class="checkbox">
+          <input
+            id="terms"
+            name="terms"
+            type="checkbox"
+            required
+            aria-describedby="terms-error"
+          />
+          I agree to the Terms & Privacy Policy *
+        </label>
+        <small id="terms-error" class="error" aria-live="polite"></small>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">Create Account</button>
+
+      <!-- Form-level error summary area (optional for JS later) -->
+      <div id="form-errors" role="alert" aria-live="polite"></div>
+    </form>
+  </main>
+  <script src="index.js"></script>
+</body>
+</html>

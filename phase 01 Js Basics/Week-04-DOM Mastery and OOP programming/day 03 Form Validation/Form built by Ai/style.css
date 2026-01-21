@@ -1,0 +1,118 @@
+
+/* 1) Basic theme (simple variables for easy tweaks) */
+:root {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --ok: #10b981;
+  --error: #ef4444;
+  --border: #d1d5db;
+  --radius: 8px;
+  --shadow: 0 6px 16px rgba(0,0,0,0.08);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* 2) Layout */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+main { width: 100%; max-width: 460px; }
+
+/* 3) Form panel */
+#signupForm {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#signupForm h1 {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+}
+
+/* 4) Field blocks */
+.field { display: grid; gap: 6px; }
+label { font-size: 14px; }
+.hint { color: var(--muted); font-size: 12px; }
+.error { color: var(--error); font-size: 12px; min-height: 16px; }
+
+/* 5) Inputs */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+::placeholder { color: #9ca3af; }
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Valid/invalid states using built-in HTML validation */
+input:required:valid { border-color: var(--ok); }
+input:invalid:not(:focus):not(:placeholder-shown) { border-color: var(--error); }
+
+/* 6) Checkbox */
+label.checkbox {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  align-items: start;
+}
+label.checkbox input[type="checkbox"] {
+  width: 18px; height: 18px;
+}
+
+/* 7) Submit button */
+button[type="submit"] {
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  transition: filter 0.15s ease, transform 0.05s ease;
+}
+button[type="submit"]:hover { filter: brightness(1.05); }
+button[type="submit"]:active { transform: translateY(1px); }
+
+/* 8) Form error summary (we’ll toggle with JS) */
+#form-errors {
+  display: none;
+  border: 1px solid var(--error);
+  background: #fee2e2;
+  color: #7f1d1d;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+/* 9) Screen reader helper */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
