@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHunt - Find Your Next Watch</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar flex-between p-x-container">
+        <div class="logo">
+            <h1>🎬 Movie<span>Hunt</span></h1>
+        </div>
+        <nav class="nav-links">
+            <button class="nav-btn active" id="tab-home">Home</button>
+            <button class="nav-btn" id="tab-favorites">My Favorites ❤️</button>
+        </nav>
+    </header>
+
+    <section class="hero-section flex-center text-center p-y-large">
+        <div class="hero-content">
+            <h2>What do you want to watch?</h2>
+            <p class="text-muted">Search millions of movies and find where to stream them.</p>
+            
+            <div class="search-box flex-center mt-3">
+                <input type="text" id="search-input" placeholder="e.g. Inception, Batman..." autocomplete="off">
+                <button id="search-btn" class="btn-primary"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container p-x-container p-y-large">
+        <h3 id="section-title" class="section-title mb-3">Trending Today</h3>
+        
+        <div id="loading-spinner" class="text-center hidden">
+            <p>Loading magic...</p><span class="loader"></span>
+        </div>
+
+        <div id="movie-grid" class="movie-grid">
+            </div>
+    </main>
+    <div id="movie-modal" class="modal-overlay hidden flex-center">
+        <div class="modal-content flex-row">
+            
+            <button id="close-modal" class="close-modal">&times;</button>
+            
+            <div class="modal-poster">
+                <img id="modal-img" src="" alt="Movie Poster">
+            </div>
+            
+            <div class="modal-details">
+                <h2 id="modal-title" class="mb-2">Movie Title</h2>
+                <p id="modal-tagline" class="text-warning mb-2" style="font-style: italic;"></p>
+                
+                <div class="flex-row mb-2">
+                    <span id="modal-rating" class="tag">⭐ 0.0</span>
+                    <span id="modal-runtime" class="tag">⏱️ 0 min</span>
+                    <span id="modal-year" class="tag">📅 YYYY</span>
+                </div>
+                
+                <div id="modal-genres" class="flex-row mb-3">
+                    </div>
+                
+                <h4 class="mb-1">Overview:</h4>
+                <p id="modal-plot" class="text-muted mb-3">Movie ki kahani yahan aayegi...</p>
+                
+                <h4 class="mb-1">Where to Watch:</h4>
+                <div class="flex-row">
+                    <a href="#" class="btn-link yt" target="_blank"><i class="fab fa-youtube"></i> Trailer</a>
+                    <a href="#" class="btn-link nf" target="_blank">Netflix</a>
+                    <a href="#" class="btn-link amz" target="_blank">Prime</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
