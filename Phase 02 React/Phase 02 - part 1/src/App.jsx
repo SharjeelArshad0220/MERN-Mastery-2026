@@ -1,37 +1,35 @@
-// import { useState } from 'react'
-import FirstComponent,{ProductCard,Counter} from "./WEEK 5 REACT FUNDAMENTALS AND COMPONENT THINKING/Day 01-React Introduction & Setup/Practice files/Practice.jsx";
-import './App.css'
-
-function App() {
-  // const [count, setCount] = useState(0)
-
-  return (
-    /*<>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>My first react app noor btao kesi ha ?</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-    */<>
-    {/* <ProductCard/> */}
-    <Counter/></>
-  )
+import './firstTail.css'
+import {ProductCard} from "./WEEK 5 REACT FUNDAMENTALS AND COMPONENT THINKING/Day 02-React PROPS/Practice files/ProductCard.jsx";
+import {ReviewCard} from "./WEEK 5 REACT FUNDAMENTALS AND COMPONENT THINKING/Day 02-React PROPS/Practice files/review Card.jsx";
+import {Badge} from "./WEEK 5 REACT FUNDAMENTALS AND COMPONENT THINKING/Day 02-React PROPS/Practice files/City badge.jsx";
+// ============================================
+// FILE: App.jsx  
+// PURPOSE: Parent that uses ProductCard
+// ============================================
+export function App() {
+return (
+<div className="product-grid ">
+<h1>🛍Lahore Electronics</h1>
+<ProductCard 
+name="Samsung 55\4K TV"
+price={95000}
+rating={4}
+inStock={true}
+/>
+<ProductCard 
+name="JBL Bluetooth Speaker"
+price={12500}
+rating={5}
+inStock={true}
+/>
+<ReviewCard 
+customerName="Ahmed Raza"
+city="Lahore"
+reviewText="Bohat acha product hai! Highly recommend."
+stars={4}
+verified={true}
+/>
+</div>
+);
 }
-
 export default App
