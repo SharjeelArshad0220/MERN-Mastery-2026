@@ -1,18 +1,20 @@
 import { useState } from "react";
 
-export function TaskForm({ tasks, setTasks }) {
+export default function TaskForm({ tasks, setTasks }) {
     const today = new Date().toISOString().split('T')[0];
     const initialState = { taskInput: '', priority: 'Medium', date: today, description: '', isCompleted: false };
     const [taskData, setTaskData] = useState(initialState);
     const { taskInput, priority, date, description } = taskData;
 
     const handleSubmit = (event) => {
+        console.log('clicked');
+        
         event.preventDefault();
         // Trim here so user can type spaces while typing
         const task = { 
-            id: (Date.now() + Math.random()).toFixed(1), 
+            id: (Date.now() + Math.random()).toFixed(1),
             ...taskData,
-            taskInput: taskData.taskInput.trim() 
+            taskInput: taskData.taskInput.trim()
         };
         setTasks([...tasks, task]);
         setTaskData(initialState);
